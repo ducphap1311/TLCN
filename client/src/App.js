@@ -16,9 +16,9 @@ import { OrdersPage } from "./pages/OrdersPage";
 
 function App() {
     const dispatch = useDispatch()
-    const {cartItems} = useSelector(store => store.cart)
-    const {pathname} = useLocation()
-    
+    const { cartItems } = useSelector(store => store.cart)
+    const { pathname } = useLocation()
+
     useEffect(() => {
         dispatch(getTotalAmount())
     }, [cartItems])
@@ -26,7 +26,7 @@ function App() {
     useEffect(() => {
         dispatch(getAllProducts())
     }, [])
-    
+
     useEffect(() => {
         window.scrollTo(0, 0)
     }, [pathname])
@@ -34,7 +34,7 @@ function App() {
     return (
         <Routes>
             <Route path="/" element={<HomePage />} />
-            <Route path="/about-us" element={<AboutPage />} />
+            <Route path="/about-usssss" element={<AboutPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/contact" element={<ContactPage />} />
             <Route path="/products/:id" element={<SingleProductPage />} />
