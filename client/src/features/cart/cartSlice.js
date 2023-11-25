@@ -32,11 +32,12 @@ const cartSlice = createSlice({
         addItem: (state, action) => {
             let flag = false;
             const items = state.cartItems.map((item) => {
-                if (item._id === action.payload.id) {
+                if (item._id === action.payload.id && item.size === action.payload.size) {
                     flag = true;
                     return {
                         ...item,
                         amount: item.amount + action.payload.amount,
+                        size: action.payload.size
                     };
                 }
                 return item;
@@ -48,6 +49,7 @@ const cartSlice = createSlice({
                     (item) => item._id === action.payload.id
                 );
                 newItem[0].amount = action.payload.amount;
+                newItem[0].size = action.payload.size;
                 state.cartItems = [...state.cartItems, newItem[0]];
             }
             state.cartItems = [...state.cartItems];

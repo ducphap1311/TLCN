@@ -8,11 +8,13 @@ import "../styles/SingleProduct.scss";
 import { addItem } from "../features/cart/cartSlice";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 export const SingleProduct = () => {
     const { id } = useParams();
     const [singleProduct, setSingleProduct] = useState();
     const [amount, setAmount] = useState(1);
+    const [size, setSize] = useState('38');
     const dispatch = useDispatch();
     
     const getSingleProduct = async () => {
@@ -96,6 +98,18 @@ export const SingleProduct = () => {
                             <i className="fa-solid fa-dollar-sign"></i>
                             {price}
                         </p>
+                        <div className="product-size">
+                            <p>Size: </p>
+                            <ul className="size-container">
+                                <li className={`${size === '38' ? 'active-size': ''}`} onClick={() => setSize('38')}>38</li>
+                                <li className={`${size === '39' ? 'active-size': ''}`} onClick={() => setSize('39')}>39</li>
+                                <li className={`${size === '40' ? 'active-size': ''}`} onClick={() => setSize('40')}>40</li>
+                                <li className={`${size === '41' ? 'active-size': ''}`} onClick={() => setSize('41')}>41</li>
+                                <li className={`${size === '42' ? 'active-size': ''}`} onClick={() => setSize('42')}>42</li>
+                                <li className={`${size === '43' ? 'active-size': ''}`} onClick={() => setSize('43')}>43</li>
+                                <li className={`${size === '44' ? 'active-size': ''}`} onClick={() => setSize('44')}>44</li>
+                            </ul>
+                        </div>
                         <p className="product-description">{description}</p>
                         <div className="product-quantity">
                             <button onClick={decreaseAmount}>
@@ -109,7 +123,7 @@ export const SingleProduct = () => {
                         <button
                             className="add-btn"
                             onClick={() => {
-                                dispatch(addItem({ id: _id, amount }));
+                                dispatch(addItem({ id: _id, amount, size }));
                                 toast("Add to cart successfully!", {
                                     type: "success",
                                     draggable: false,
@@ -119,6 +133,20 @@ export const SingleProduct = () => {
                         >
                             Add to cart
                         </button>
+                        <Link to='/cart' className="buy-btn-container">
+                            <button
+                                className="buy-btn"
+                                onClick={() => {
+                                    dispatch(addItem({ id: _id, amount, size }));
+                                    // toast("Add to cart successfully!", {
+                                    //     type: "success",
+                                    //     draggable: false,
+                                    // });
+                                }}
+                            >
+                                Buy now
+                            </button>
+                        </Link>
                     </div>
                 </div>
             </div>

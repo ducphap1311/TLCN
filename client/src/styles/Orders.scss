@@ -3,7 +3,7 @@
 
 .orders {
     font-family: $poppins-font;
-    max-width: 1140px;
+    max-width: 1200px;
     margin: 200px auto;
     padding: 0 20px;
 }
@@ -63,13 +63,21 @@ tr{
     color: rgb(40, 40, 40);
 }
 
-tr:nth-child(odd) {
-    background-color: #f2f2f2;
-}
+// tr:nth-child(odd) {
+//     background-color: #f2f2f2;
+// }
 
 tr:nth-child(1){
     background-color: transparent;
     color: black;
+}
+
+.order-detail-link{
+    text-decoration: none;
+    color: $primary-color;
+    &:hover{
+        color: $hover-color;
+    }
 }
 
 @media screen and (max-width: 768px){

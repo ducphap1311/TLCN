@@ -29,7 +29,12 @@ const productSchema = new mongoose.Schema({
     },
     quality: {
         type: String,
+    },
+    size: {
+        type: String,
+        default: '38'
     }
+
 },
 { timestamps: true })
 

@@ -17,4 +17,13 @@ const createOrder = async (req, res) => {
     res.status(200).json({order});
 };
 
-module.exports = { getOrders, getAllOrders, createOrder };
+const getSingleOrder = async (req, res) => {
+    const id = req.params.id
+    const order = await Order.findOne({_id: id})
+    if(!order){
+        throw new NotFoundError(`No order with id ${id}`)
+    }
+    res.status(200).json({order})
+}
+
+module.exports = { getOrders, getAllOrders, createOrder, getSingleOrder };

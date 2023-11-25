@@ -76,11 +76,13 @@ export const Orders = () => {
                         <table>
                             <tbody>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Customer</th>
                                     <th>Address</th>
                                     <th>Products</th>
                                     <th>Cost</th>
                                     <th>Date</th>
+                                    <th>Status</th>
+                                    <th>Detail</th>
                                 </tr>
                                 {orders.map((order) => {
                                     return <Order key={order._id} {...order} />;

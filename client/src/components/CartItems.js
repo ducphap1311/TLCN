@@ -33,7 +33,7 @@ export const CartItems = () => {
                             <h3 className="title-total">Total</h3>
                         </div>
                         {cartItems.map((item) => {
-                            const { _id, images, name, price, amount } = item;
+                            const { _id, images, name, price, amount, size } = item;
                             return (
                                 <div key={_id} className="item">
                                     <div className="item-info">
@@ -47,6 +47,7 @@ export const CartItems = () => {
                                                 <h2 className="product-name">
                                                     {name} Candleaf®
                                                 </h2>
+                                                <p>Size: {size}</p>
                                                 <button
                                                     className="remove-btn"
                                                     onClick={() => {

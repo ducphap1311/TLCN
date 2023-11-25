@@ -105,6 +105,41 @@
                 font-weight: bold;
                 letter-spacing: 1px;
             }
+            .product-size{
+                margin: 30px 0;
+                display: flex;
+                align-items: center;
+                p{
+                    font-size: 16px;
+                    font-weight: bold;
+                    margin-right: 5px;
+                    letter-spacing: 0.9px;
+                }
+                .size-container{
+                    width: 100%;
+                    display: flex;
+                    // justify-content: space-between;
+                    flex-wrap: wrap;
+                    li{
+                        margin: 5px;
+                        list-style-type: none;
+                        padding: 5px 10px;
+                        border: 1px solid $primary-color;
+                        cursor: pointer;
+                        font-size: 14px;
+                        letter-spacing: 0.9px;
+                        transition: 0.3s ease;
+                        &:hover{
+                            background-color: $primary-color;
+                            color: white;
+                        }
+                        &.active-size{
+                            background-color: $primary-color;
+                            color: white;
+                        }
+                    }
+                }
+            }
             .product-description{
                 line-height: 25px;
                 color: rgb(53, 53, 53);
@@ -143,8 +178,12 @@
                     font-weight: bold;
                 }
             }
-            .add-btn{
-                padding: 7px 50px;
+            .buy-btn-container{
+                text-decoration: none;
+            }
+            .add-btn,
+            .buy-btn{
+                padding: 7px 0;
                 font-size: 18px;
                 text-transform: uppercase;
                 font-weight: bold;
@@ -153,6 +192,11 @@
                 border: 2px solid transparent;
                 cursor: pointer;
                 transition: 0.3s ease;
+                display: block;
+                max-width: 300px;
+                width: 100%;
+                margin-bottom: 15px;
+                letter-spacing: 0.8px;
                 &:hover{
                     background-color: $hover-color;
                     border-color: $primary-color;
