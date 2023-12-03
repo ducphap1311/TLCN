@@ -26,7 +26,7 @@ const Product = ({ product }) => {
                 className="add-btn"
                 onClick={() => {
                     dispatch(
-                        addItem({ id: product._id, amount: product.amount })
+                        addItem({ id: product._id, amount: 1, size: '38' })
                     );
                     toast("Add to cart successfully!", {
                         type: "success",

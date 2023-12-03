@@ -22,7 +22,6 @@ export const OrderDetail = () => {
             }
             const responseData = await response.json();
             const data = responseData.order;
-            console.log(data);
             setOrder(data);
         } catch (error) {
             console.log(error);

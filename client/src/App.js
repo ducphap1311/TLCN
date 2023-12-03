@@ -14,6 +14,7 @@ import { useLocation } from "react-router-dom";
 import { CheckOutPage } from "./pages/CheckOutPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import { OrderDetailPage } from "./pages/OrderDetailPage";
+import { ResetPasswordPage } from "./pages/ResetPasswordPage";
 
 function App() {
     const dispatch = useDispatch()
@@ -45,7 +46,7 @@ function App() {
             <Route path="/checkout" element={<CheckOutPage />} />
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/orders/:id" element={<OrderDetailPage />} />
-
+            <Route path="/reset-password/:id" element={<ResetPasswordPage />} />
         </Routes>
     );
 }

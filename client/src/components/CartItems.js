@@ -32,16 +32,18 @@ export const CartItems = () => {
                             <h3 className="title-quantity">Quantity</h3>
                             <h3 className="title-total">Total</h3>
                         </div>
-                        {cartItems.map((item) => {
+                        {cartItems.map((item, index) => {
                             const { _id, images, name, price, amount, size } = item;
                             return (
-                                <div key={_id} className="item">
+                                <div key={index} className="item">
                                     <div className="item-info">
-                                        <img
-                                            src={images[0]}
-                                            alt="img"
-                                            className="product-img"
-                                        />
+                                        {/* <Link to={`/products/${_id}`}> */}
+                                            <img
+                                                src={images[0]}
+                                                alt="img"
+                                                className="product-img"
+                                            />
+                                            {/* </Link> */}
                                         <div className="product-info1">
                                             <div>
                                                 <h2 className="product-name">
@@ -52,7 +54,7 @@ export const CartItems = () => {
                                                     className="remove-btn"
                                                     onClick={() => {
                                                         dispatch(
-                                                            removeItem(_id)
+                                                            removeItem({_id, size})
                                                         );
                                                     }}
                                                 >

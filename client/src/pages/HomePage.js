@@ -5,7 +5,7 @@ import { HomeProducts } from "../components/HomeProducts";
 import { Navbar } from "../components/Navbar";
 export const HomePage = () => {
     return (
-        <>
+        <React.Fragment>
             <Navbar />
             <HeroSlider />
             <HomeProducts
@@ -19,6 +19,6 @@ export const HomePage = () => {
                 icon="fa-solid fa-fire-flame-curved"
             />
             <Footer />
-        </>
+        </React.Fragment>
     )
 }
