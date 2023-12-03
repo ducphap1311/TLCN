@@ -8,6 +8,72 @@ import { toast } from "react-toastify";
 const Product = ({ product }) => {
     const dispatch = useDispatch();
 
+    const addToCart = async (_id, amount, totalAmount, size) => {
+        if (totalAmount === 0) {
+            toast("The product is out of stock", {
+                type: "error",
+                draggable: false,
+            });
+            return;
+        }
+        if (amount > totalAmount) {
+            toast("Not enough products to add", {
+                type: "error",
+                draggable: false,
+            });
+            return;
+        } else {
+            let flag = false;
+            cartItems.forEach((item) => {
+                if (item._id === _id) {
+                    if (item.amount + amount > totalAmount) {
+                        flag = true;
+                        toast(
+                            "The selected quantity exceed your purchase limit",
+                            {
+                                type: "error",
+                                draggable: false,
+                            }
+                        );
+                    }
+                }
+            });
+            if (!flag) {
+                toast("Add to cart successfully", {
+                    type: "success",
+                    draggable: false,
+                });
+                dispatch(addItem({ id: _id, amount, totalAmount, size }));
+            } else {
+                return;
+            }
+        }
+        
+        // try {
+        //     const requestOptions = {
+        //         method: "PUT",
+        //         headers: {
+        //             "Content-Type": "application/json",
+        //         },
+        //         body: JSON.stringify({
+        //             totalAmount: totalAmount - 1,
+        //         }),
+        //     };
+        //     const response = await fetch(
+        //         `http://localhost:5000/api/v1/products/${_id}`,
+        //         requestOptions
+        //     );
+        //     console.log(response);
+        //     dispatch(addItem({ id: _id, amount }));
+        //     toast("Add to cart successfully!", {
+        //         type: "success",
+        //         draggable: false,
+        //     });
+        // } catch (error) {
+        //     console.log(error);
+        // }
+    };
+
     return (
         <div key={product._id} className="product-info">
             <Link to={`/products/${product._id}`}>
@@ -24,16 +90,17 @@ const Product = ({ product }) => {
             </p>
             <button
                 className="add-btn"
-                onClick={() => {
-                    dispatch(
-                        addItem({ id: product._id, amount: 1, size: '38' })
-                    );
-                    toast("Add to cart successfully!", {
-                        type: "success",
-                        draggable: false,
-                        theme: 'dark'
-                    });
-                }}
+                // onClick={() => {
+                //     dispatch(
+                //         addItem({ id: product._id, amount: 1, size: '38' })
+                //     );
+                //     toast("Add to cart successfully!", {
+                //         type: "success",
+                //         draggable: false,
+                //         theme: 'dark'
+                //     });
+                // }}
+                onClick={() => addToCart(product._id, 1, product.totalAmount, size)}
             >
                 Add To Cart
             </button>
