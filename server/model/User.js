@@ -8,7 +8,6 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: [true, "please provide user name!!!"],
         maxlength: 20,
-        minlength: 3,
     },
     email: {
         type: String,
@@ -24,7 +23,27 @@ const userSchema = new mongoose.Schema({
         required: [true, "Please provide password"],
     },
     resetPasswordToken: {
-        type: String
+        type: String,
+    },
+    city: {
+        type: String,
+        required: [true, "Please provide city"]
+    },
+    district: {
+        type: String,
+        required: [true, "Please provide district"]
+    },
+    ward: {
+        type: String,
+        required: [true, "Please provide ward"]
+    },
+    address: {
+        type: String,
+        required: [true, "Please provide address detail"]
+    },
+    phone: {
+        type: String,
+        required: [true, "Please provide phone number"]
     }
 });
 

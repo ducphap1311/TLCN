@@ -134,13 +134,25 @@ export const CheckOut = () => {
             name: localStorage.getItem("username")
                 ? localStorage.getItem("username")
                 : "",
-            city: "",
-            district: "",
-            ward: "",
-            address: "",
+            phone: localStorage.getItem("phone")
+            ? localStorage.getItem("phone")
+            : "",
+            city: localStorage.getItem("city")
+                ? localStorage.getItem("city")
+                : "",
+            district: localStorage.getItem("district")
+                ? localStorage.getItem("district")
+                : "",
+            ward: localStorage.getItem("ward")
+                ? localStorage.getItem("ward")
+                : "",
+            address: localStorage.getItem("address")
+            ? localStorage.getItem("address")
+            : "",
         },
         validationSchema: Yup.object({
             name: Yup.string().required("Please provide your name"),
+            phone: Yup.string().required("Please provide phone number"),
             city: Yup.string().required("Please provide city"),
             district: Yup.string().required("Please provide district"),
             ward: Yup.string().required("Please provide ward"),
@@ -157,6 +169,7 @@ export const CheckOut = () => {
                 },
                 body: JSON.stringify({
                     name: values.name,
+                    phone: values.phone,
                     address: `${values.address}, ${values.ward}, ${values.district}, ${values.city}`,
                     orderTotal: total + shippingPrice,
                     cartItems: cartItems,
@@ -172,6 +185,12 @@ export const CheckOut = () => {
                     throw new Error("something wrong here!");
                 }
                 localStorage.removeItem("cartItems");
+                localStorage.setItem("city", values.city)
+                localStorage.setItem("ward", values.ward)
+                localStorage.setItem("district", values.district)
+                localStorage.setItem("phone", values.phone)
+                localStorage.setItem("username", values.name)
+                localStorage.setItem("address", values.address)
                 dispatch(clearCart());
                 updateProducts();
                 navigate("/orders");
@@ -225,6 +244,21 @@ export const CheckOut = () => {
                                 </p>
                             ) : null}
                         </div>
+                        <div className="name-information">
+                            <label>Your Phone Number</label>
+                            <input
+                                type="text"
+                                name="phone"
+                                value={formik.values.phone}
+                                onChange={formik.handleChange}
+                                onBlur={formik.handleBlur}
+                            />
+                            {formik.touched.phone && formik.errors.phone ? (
+                                <p className="name-error">
+                                    {formik.errors.phone}
+                                </p>
+                            ) : null}
+                        </div>
                         <div className="city-information">
                             <label>City</label>
                             <select
@@ -233,7 +267,9 @@ export const CheckOut = () => {
                                 onChange={handleCityChange}
                                 onBlur={formik.handleBlur}
                             >
-                                <option value="">Choose city</option>
+                                <option value={localStorage.getItem("city")}>
+                                    {localStorage.getItem("city")}
+                                </option>
                                 {citiesList.map((city, index) => {
                                     return (
                                         <option key={index} value={city.name}>
@@ -256,7 +292,11 @@ export const CheckOut = () => {
                                 name="district"
                                 onBlur={formik.handleBlur}
                             >
-                                <option value="">Choose district</option>
+                                <option
+                                    value={localStorage.getItem("district")}
+                                >
+                                    {localStorage.getItem("district")}
+                                </option>
                                 {districtsList.map((district, index) => {
                                     return (
                                         <option
@@ -283,7 +323,9 @@ export const CheckOut = () => {
                                 name="ward"
                                 onBlur={formik.handleBlur}
                             >
-                                <option value="">Choose ward</option>
+                                <option value={localStorage.getItem("ward")}>
+                                    {localStorage.getItem("ward")}
+                                </option>
                                 {wardsList.map((ward, index) => {
                                     return (
                                         <option value={ward.name} key={index}>
@@ -299,7 +341,7 @@ export const CheckOut = () => {
                             ) : null}
                         </div>
                         <div className="address-information">
-                            <label>Address Detail</label>
+                            <label>Address Detail (house number, street name)</label>
                             <input
                                 type="text"
                                 name="address"

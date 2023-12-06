@@ -4,7 +4,7 @@
 .register{
     font-family: $roboto-font;
     height: 100vh;
-    @include flex(row, center, center);
+    @include flex(row, center, flex-start);
     padding-top: 200px;
     
     .register-form{
@@ -26,15 +26,37 @@
         }
         
         .username-container,
-        .email-container{
+        .email-container,
+        .city-container,
+        .district-container,
+        .ward-container,
+        .phone-container,
+        .address-container{
             margin-bottom: 23px;
         }
         .password-container{
             margin-bottom: 10px;
         }
+        select{
+            width: 100%;
+            padding: 10px 5px;
+            font-size: 17px;
+            outline: none;
+            cursor: pointer;
+            border: 1px solid #C2C5E1;
+            option{
+                cursor: pointer;
+                color:#9096B2;
+            }
+        }
         .email-input,
         .username-input,
-        .password-input{
+        .phone-input,
+        .city-input,
+        .district-input,
+        .ward-input,
+        .password-input,
+        .address-input{
             outline: none;
             border-radius: 2px;
             border: 1px solid #C2C5E1;
@@ -51,29 +73,46 @@
                 border-color: $primary-color;
             }
         }
+        .city-input,
+        .district-input,
+        .ward-input,
+        .username-input,
+        .email-input,
+        .password-input,
+        .phone-input,
+        .address-input{
+            padding: 10px 13px;
+            width: 100%;
+            border-radius: 5px;
+        }
         .username-input{
-            padding: 15px 13px;
+            padding: 10px 13px;
             width: 100%;
             border-radius: 5px;
         }
         .email-input{
-            padding: 15px 13px;
+            padding: 10px 13px;
             width: 100%;
             border-radius: 5px;
         }
         .password-input{
-            padding: 15px 13px;
+            padding: 10px 13px;
             width: 100%;
             border-radius: 5px;
         }
         .password-confirm-input{
-            padding: 15px 13px;
+            padding: 10px 13px;
             width: 100%;
             border-radius: 5px;
         }
         .username-error,
         .email-error,
-        .password-error{
+        .password-error,
+        .city-error,
+        .district-error,
+        .ward-error,
+        .phone-error,
+        .address-error{
             text-align: left;
             color: red;
             font-size: 13px;

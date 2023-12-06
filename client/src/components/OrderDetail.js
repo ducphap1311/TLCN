@@ -64,6 +64,7 @@ export const OrderDetail = () => {
                     <div className="shipping-informations">
                         <h3>Shipping Informations</h3>
                         <p>Name: {order.name}</p>
+                        <p>Phone number: {order.phone}</p>
                         <p>Address: {order.address}</p>
                         <p>Date: {formattedTime}</p>
                         <p>Order total: ${order.orderTotal}</p>

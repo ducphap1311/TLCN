@@ -2,11 +2,12 @@ import React, { memo } from "react";
 import "../styles/Product.scss";
 import { Link } from "react-router-dom";
 import { addItem } from "../features/cart/cartSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 
 const Product = ({ product }) => {
     const dispatch = useDispatch();
+    const {cartItems} = useSelector(store => store.cart)
 
     const addToCart = async (_id, amount, totalAmount, size) => {
         if (totalAmount === 0) {
@@ -48,30 +49,6 @@ const Product = ({ product }) => {
                 return;
             }
         }
-        
-        // try {
-        //     const requestOptions = {
-        //         method: "PUT",
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //         },
-        //         body: JSON.stringify({
-        //             totalAmount: totalAmount - 1,
-        //         }),
-        //     };
-        //     const response = await fetch(
-        //         `http://localhost:5000/api/v1/products/${_id}`,
-        //         requestOptions
-        //     );
-        //     console.log(response);
-        //     dispatch(addItem({ id: _id, amount }));
-        //     toast("Add to cart successfully!", {
-        //         type: "success",
-        //         draggable: false,
-        //     });
-        // } catch (error) {
-        //     console.log(error);
-        // }
     };
 
     return (
@@ -90,17 +67,7 @@ const Product = ({ product }) => {
             </p>
             <button
                 className="add-btn"
-                // onClick={() => {
-                //     dispatch(
-                //         addItem({ id: product._id, amount: 1, size: '38' })
-                //     );
-                //     toast("Add to cart successfully!", {
-                //         type: "success",
-                //         draggable: false,
-                //         theme: 'dark'
-                //     });
-                // }}
-                onClick={() => addToCart(product._id, 1, product.totalAmount, size)}
+                onClick={() => addToCart(product._id, 1, product.totalAmount, '38')}
             >
                 Add To Cart
             </button>

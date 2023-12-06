@@ -119,14 +119,14 @@ export const Products = () => {
                             >
                                 Women
                             </li>
-                            <li
+                            {/* <li
                                 className={`${
                                     category === "kids" && "category-active"
                                 }`}
                                 onClick={() => setCategory("kids")}
                             >
                                 Kids
-                            </li>
+                            </li> */}
                         </ul>
                     </div>
                     <div className="qualities-container">

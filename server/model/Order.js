@@ -6,6 +6,10 @@ const orderSchema = new mongoose.Schema(
             type: String,
             required: [true, "please provide name"],
         },
+        phone: {
+            type: String,
+            required: [true, "Please provide phone number"]
+        },
         address: {
             type: String,
             required: [true, "please provide address"],

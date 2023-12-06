@@ -3,6 +3,7 @@ const { UnauthenticatedError } = require('../errors')
 require('dotenv').config()
 
 const authenticateUser = async (req, res, next) => {
+    
     const authHeader = req.headers.authorization
     if(!authHeader || !authHeader.startsWith('Bearer')){
         throw new UnauthenticatedError('No valid token provided')

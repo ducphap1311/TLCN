@@ -7,10 +7,10 @@ export const Navbar = () => {
         <div className="navbar">
             <h1>Dashboard</h1>
             <ul className="sidebar">
-                <NavLink to='/'>Add product</NavLink>
-                <NavLink to='/allproducts'>All products</NavLink>
-                <NavLink to='/allorders'>All orders</NavLink>
-                <NavLink to='/allusers'>All users</NavLink>
+                <NavLink to='/'>Add Product</NavLink>
+                <NavLink to='/allproducts'>All Products</NavLink>
+                <NavLink to='/allorders'>All Orders</NavLink>
+                <NavLink to='/allusers'>All Users</NavLink>
             </ul>
         </div>
     );

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
@@ -10,9 +10,29 @@ import "../styles/CartItems.scss";
 
 export const CartItems = () => {
     const dispatch = useDispatch();
-    const { total, cartItems } = useSelector((store) => store.cart);
+    const { total, cartItems, data } = useSelector((store) => store.cart);
     const token = localStorage.getItem("token");
+    const [needUpdatingProducts, setNeedUpdatingProducts] = useState();
     
+    useEffect(() => {
+        getNeedUpdatingProducts()
+    }, [])
+    const getNeedUpdatingProducts = () => {
+        let idsList = cartItems.map((item) => {
+            return item._id;
+        });
+        let productsList = [];
+        idsList.forEach(async (id) => {
+            const response = await fetch(
+                `http://localhost:5000/api/v1/products/${id}`
+            );
+            const responseData = await response.json();
+            const data = responseData.product;
+            productsList.push(data);
+        });
+        setNeedUpdatingProducts(productsList);
+    };
+
     if (cartItems.length !== 0) {
         return (
             <div className="cart-items">
@@ -37,18 +57,20 @@ export const CartItems = () => {
                             return (
                                 <div key={index} className="item">
                                     <div className="item-info">
-                                        {/* <Link to={`/products/${_id}`}> */}
+                                        <Link to={`/products/${_id}`}>
                                             <img
                                                 src={images[0]}
                                                 alt="img"
                                                 className="product-img"
                                             />
-                                            {/* </Link> */}
+                                            </Link>
                                         <div className="product-info1">
                                             <div>
-                                                <h2 className="product-name">
-                                                    {name} Candleaf®
-                                                </h2>
+                                                <Link to={`/products/${_id}`} style={{textDecoration: 'none', color: 'black'}}>
+                                                    <h2 className="product-name">
+                                                        {name} Candleaf®
+                                                    </h2>
+                                                </Link>
                                                 <p>Size: {size}</p>
                                                 <button
                                                     className="remove-btn"

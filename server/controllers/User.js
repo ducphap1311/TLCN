@@ -8,6 +8,7 @@ const sgMail = require("@sendgrid/mail");
 const jwt = require("jsonwebtoken");
 
 const register = async (req, res) => {
+    // console.log(req.body);
     const { username, email, password } = req.body;
     if (!username || !email || !password) {
         throw new BadRequestError("Please provide necessary informations");
@@ -18,6 +19,11 @@ const register = async (req, res) => {
         msg: "user created",
         token,
         username: user.username,
+        city: user.city,
+        district: user.district,
+        ward: user.ward,
+        address: user.address,
+        phone: user.phone,
     });
 };
 
@@ -35,11 +41,20 @@ const login = async (req, res) => {
         throw new UnauthenticatedError("Invalid password");
     }
     const token = user.createJWT();
-    res.status(200).json({ msg: "user found", token, username: user.username });
+    res.status(200).json({
+        msg: "user found",
+        token,
+        username: user.username,
+        username: user.username,
+        city: user.city,
+        district: user.district,
+        ward: user.ward,
+        phone: user.phone,
+        address: user.address
+    });
 };
 
 const dashboard = async (req, res) => {
-    console.log(req.user);
     res.status(200).json({ msg: "success" });
 };
 
@@ -59,20 +74,24 @@ const forgotPassword = async (req, res) => {
         process.env.JWT_SECRET,
         { expiresIn: "1h" }
     );
-    user.resetPasswordToken = resetPasswordToken
-    await user.save()
+    user.resetPasswordToken = resetPasswordToken;
+    await user.save();
     res.status(200).json({ resetPasswordToken });
 };
 
 const resetPassword = async (req, res) => {
     const { email, token } = req.user;
-    const user = await User.findOneAndUpdate({ email, resetPasswordToken: token }, req.body, {
-        new: true,
-        runValidators: true,
-    });
-    user.resetPasswordToken = undefined
-    await user.save()
-    res.status(200).json({user})
+    const user = await User.findOneAndUpdate(
+        { email, resetPasswordToken: token },
+        req.body,
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
+    user.resetPasswordToken = undefined;
+    await user.save();
+    res.status(200).json({ user });
 };
 
 const checkUser = async (req, res) => {};

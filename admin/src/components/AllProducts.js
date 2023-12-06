@@ -6,7 +6,7 @@ export const AllProducts = () => {
     const [images, setImages] = useState([]);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
-    const [amount, setAmount] = useState("");
+    const [totalAmount, setTotalAmount] = useState("");
     const [category, setCategory] = useState("");
     const [quality, setQuality] = useState("");
     const [description, setDescription] = useState("");
@@ -34,7 +34,7 @@ export const AllProducts = () => {
                 images: images.split(','),
                 name,
                 price: Number(price),
-                amount: Number(price),
+                totalAmount: Number(price),
                 category,
                 quality,
                 description
@@ -67,7 +67,7 @@ export const AllProducts = () => {
         setImages(data.images.join(','))
         setName(data.name)
         setPrice(data.price)
-        setAmount(data.amount)
+        setTotalAmount(data.totalAmount)
         setCategory(data.category)
         setQuality(data.quality)
         setDescription(data.description)
@@ -116,8 +116,8 @@ export const AllProducts = () => {
                         id="amount"
                         name="amount"
                         required
-                        value={amount}
-                        onChange={(e) => setAmount(e.target.value)}
+                        value={totalAmount}
+                        onChange={(e) => setTotalAmount(e.target.value)}
                     />
                 </div>
                 <div className="form-child">

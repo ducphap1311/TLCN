@@ -6,13 +6,15 @@
     box-sizing: border-box;
 }
 body{
-    background-color: rgba(231, 238, 240, 0.3);
+    background-color: rgba(223, 238, 253, 1);
 }
+
 .navbar{
     padding: 20px 250px;
     border-bottom: 1px solid rgb(191, 191, 191);
-    background-color: rgb(243, 253, 255);
+    // background-color: rgb(243, 253, 255);
     // max-width: 1200px;
+    background-color: white;
     margin: 0 auto;
     font-family: sans-serif;
 }
@@ -26,13 +28,26 @@ h1{
 }
 
 .sidebar{
+    // display: flex;
+    // justify-content: space-around;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    padding-top: 200px;
+    padding-left: 50px;
+    background-color: white;
+    padding-right: 50px;
+    // margin-right: 200px;
+    // background-color: white;
     a{
         list-style-type: none;
         text-decoration: none;
         color: rgb(70, 70, 70);
         font-weight: bold;
+        margin-bottom: 50px;
     }
 
     .active{

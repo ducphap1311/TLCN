@@ -37,6 +37,11 @@ export const Navbar = () => {
     const handleLogout = () => {
         localStorage.removeItem("username");
         localStorage.removeItem("token");
+        localStorage.removeItem("city");
+        localStorage.removeItem("district");
+        localStorage.removeItem("ward");
+        localStorage.removeItem("phone");
+        localStorage.removeItem("address");
     };
 
     useEffect(() => {
@@ -118,6 +123,7 @@ export const Navbar = () => {
                                         showDropDown && "show-dropdown"
                                     }`}
                                 >
+                                    <Link to="/profile">My Profile</Link>
                                     <Link to="/orders">My Orders</Link>
                                     <Link to="/login" onClick={handleLogout}>
                                         Logout

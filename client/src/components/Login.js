@@ -7,15 +7,13 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 
 const Login = () => {
-    // const [email, setEmail] = useState("");
-    // const [password, setPassword] = useState("");
-    const [loginStatus, setLoginStatus] = useState();
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
     const [showModal, setShowModal] = useState(false);
     const passwordRef = useRef();
-    const [email, setEmail] = useState("");
+    const [loginStatus, setLoginStatus] = useState();
     const [emailStatus, setEmailStatus] = useState();
+    const [email, setEmail] = useState("");
 
     useEffect(() => {
         if (showPassword) {
@@ -56,9 +54,13 @@ const Login = () => {
                     throw new Error("Invalid email or password");
                 }
                 const responseData = await response.json();
-                const { username, token } = responseData;
+                const { username, token, city, district, ward, phone } = responseData;
                 localStorage.setItem("username", username);
                 localStorage.setItem("token", token);
+                localStorage.setItem("city", city);
+                localStorage.setItem("district", district);
+                localStorage.setItem("ward", ward);
+                localStorage.setItem("phone", phone);
                 navigate("/");
             } catch (error) {
                 setLoginStatus("rejected");
@@ -80,6 +82,7 @@ const Login = () => {
                 "http://localhost:5000/api/v2/check-user",
                 requestOptions
             );
+            console.log(response);
             if (!response.ok) {
                 throw new Error("Invalid email");
             }
@@ -107,7 +110,7 @@ const Login = () => {
             }),
         };
         await fetch("http://localhost:5000/api/v2/send-email", requestOptions);
-        localStorage.removeItem("resetPasswordToken")
+        localStorage.removeItem('resetPasswordToken')
     };
 
     return (

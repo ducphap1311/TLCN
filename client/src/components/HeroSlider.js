@@ -16,7 +16,7 @@ export const HeroSlider = () => {
         slidesToScroll: 1,
         lazyLoad: true,
         autoplay: true,
-        autoplayspeed: 10000,
+        autoplayspeed: 15000,
         responsive: [
             {
                 breakpoint: 550,

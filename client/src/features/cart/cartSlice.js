@@ -1,4 +1,5 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk, current } from "@reduxjs/toolkit";
+import {toast} from 'react-toastify'
 
 const initialState = {
     cartItems: localStorage.getItem("cartItems")
@@ -57,6 +58,7 @@ const cartSlice = createSlice({
         },
 
         removeItem: (state, action) => {
+            
             state.cartItems = state.cartItems.filter(
                 (item) => item._id !== action.payload.id && item.size !== action.payload.size
             );
@@ -77,8 +79,12 @@ const cartSlice = createSlice({
         },
 
         increaseItem: (state, action) => {
+            // console.log(state.cartItems);
+            let product = state.data.filter(item => item._id === action.payload)
+            product = JSON.parse(JSON.stringify(product));
             const newItems = state.cartItems.map((item) => {
-                if (item._id === action.payload) {
+                if (item._id === action.payload && product[0].totalAmount > item.amount) {
+
                     return { ...item, amount: item.amount + 1 };
                 }
                 return item;

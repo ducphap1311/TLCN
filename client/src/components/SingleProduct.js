@@ -231,6 +231,9 @@ export const SingleProduct = () => {
                         <div className="product-size">
                             <p>Size: </p>
                             <ul className="size-container">
+                                <li className={`${size === '35' ? 'active-size': ''}`} onClick={() => setSize('35')}>35</li>
+                                <li className={`${size === '36' ? 'active-size': ''}`} onClick={() => setSize('36')}>36</li>
+                                <li className={`${size === '37' ? 'active-size': ''}`} onClick={() => setSize('37')}>37</li>
                                 <li className={`${size === '38' ? 'active-size': ''}`} onClick={() => setSize('38')}>38</li>
                                 <li className={`${size === '39' ? 'active-size': ''}`} onClick={() => setSize('39')}>39</li>
                                 <li className={`${size === '40' ? 'active-size': ''}`} onClick={() => setSize('40')}>40</li>
