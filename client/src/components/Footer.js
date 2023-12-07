@@ -1,24 +1,24 @@
 import React from "react";
-import footerImg from "../assets/logo.png";
+import footerImg from "../assets/darklogo.png";
 import "../styles/Footer.scss";
 
 export const Footer = () => {
     return (
-        <div className="footer">
+        <div className="footer" style={{ backgroundColor: 'black' }}>
             <div className="footer-container">
                 <div className="footer-underline"></div>
                 <div className="footer-info">
                     <div className="footer-header">
                         <div className="footer-header-logo">
                             <img
-                                src="https://scontent.fsgn14-1.fna.fbcdn.net/v/t1.15752-9/395632490_889921132656124_1884520880595606214_n.png?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeFvT_8WneC0rUb2Q_hu7R6MPWT3hYqAE7c9ZPeFioATt6sfstfZW24W1HNDMiEfeWDzW9XAlZ3ibnj4AQbKZBFa&_nc_ohc=2epuke81svYAX80k4XA&_nc_ht=scontent.fsgn14-1.fna&oh=03_AdQXHMiyh0JFhXVbZEPjKdKw6JfcAxo3stctSAFXXmvShg&oe=657FE328"
+                                src={footerImg}
                                 alt="footer-logo"
                                 className="footer-header-img"
-                                style={{objectFit: 'contain'}}
+                                style={{ objectFit: 'contain', width: 200, height: 200 }}
                             />
                         </div>
                         <p className="footer-header-subtitle">
-                            Your satisfaction is our honor.
+                            A Shoes Shop In HCM City.
                         </p>
                     </div>
                     <div className="contact-info">
@@ -32,7 +32,7 @@ export const Footer = () => {
                             </p>
                             <p>
                                 <i className="fa fa-envelope"></i>
-                                hophap1311@gmail.com
+                                dhsneakerHCM@gmail.com
                             </p>
                         </div>
                     </div>

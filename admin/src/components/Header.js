@@ -1,38 +1,18 @@
 import React, { useState, useEffect, useRef } from "react";
 import "../styles/Navbar.scss";
-import logo from "../assets/logo.png";
 import { Link, NavLink } from "react-router-dom";
-import { useSelector } from "react-redux/es/hooks/useSelector";
+import { useSelector } from 'react-redux';
 
-export const Navbar = () => {
+export const Header = () => {
     const [showSidebar, setShowSidebar] = useState(false);
     const [showDropDown, setShowDropDown] = useState(false);
-    const [name, setName] = useState("");
-    const [productsOption, setProductsOption] = useState([]);
-    const { amount } = useSelector((store) => store.cart);
     const userName = localStorage.getItem("username") || null;
-    const searchFocus = useRef();
 
     const scrollToTop = () => {
         window.scrollTo({ top: 0, left: 0, behavior: "smooth" });
     };
 
-    const getProductsOption = async () => {
-        if (name !== "") {
-            try {
-                const response = await fetch(
-                    `http://localhost:5000/api/v1/products?name=${name}`
-                );
-                const responseData = await response.json();
-                const data = responseData.products;
-                setProductsOption(data);
-            } catch (error) {
-                console.log(error);
-            }
-        } else {
-            setProductsOption([]);
-        }
-    };
+
 
     const handleLogout = () => {
         localStorage.removeItem("username");
@@ -44,18 +24,7 @@ export const Navbar = () => {
         localStorage.removeItem("address");
     };
 
-    useEffect(() => {
-        searchFocus.current.focus();
-    });
 
-    useEffect(() => {
-        const timeoutId = setTimeout(() => {
-            getProductsOption();
-        }, 500);
-        return () => {
-            clearTimeout(timeoutId);
-        };
-    }, [name]);
 
     return (
         <div className="navbar">
@@ -73,38 +42,9 @@ export const Navbar = () => {
                         <img src="https://scontent.fsgn14-1.fna.fbcdn.net/v/t1.15752-9/395632490_889921132656124_1884520880595606214_n.png?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeFvT_8WneC0rUb2Q_hu7R6MPWT3hYqAE7c9ZPeFioATt6sfstfZW24W1HNDMiEfeWDzW9XAlZ3ibnj4AQbKZBFa&_nc_ohc=2epuke81svYAX80k4XA&_nc_ht=scontent.fsgn14-1.fna&oh=03_AdQXHMiyh0JFhXVbZEPjKdKw6JfcAxo3stctSAFXXmvShg&oe=657FE328" style={{ width: '130px', height: 'auto', objectFit: 'contain' }} alt="logo" className="logo-img" />
                     </Link>
                 </div>
-                <div className="navbar-search-container">
-                    <input
-                        type="text"
-                        className="search-input"
-                        placeholder="Search..."
-                        value={name}
-                        onChange={(e) => setName(e.target.value)}
-                        ref={searchFocus}
-                    />
-                    <button className="search-icon-btn">
-                        <i className="fa-solid fa-magnifying-glass"></i>
-                    </button>
-                    {productsOption.length > 0 && (
-                        <div className="products-option">
-                            {productsOption.map((product) => {
-                                return (
-                                    <Link
-                                        to={`/products/${product._id}`}
-                                        key={product._id}
-                                        className="link-name"
-                                        onClick={() => setName("")}
-                                    >
-                                        <img src={product.images[0]} alt='img' className='image' />
-                                        <span className="name">
-                                            {product.name}
-                                        </span>
-                                    </Link>
-                                );
-                            })}
-                        </div>
-                    )}
-                </div>
+
+
+
                 <div className="navbar-usercart-container">
                     <div className="navbar-user">
                         {userName ? (
@@ -150,12 +90,7 @@ export const Navbar = () => {
                         )}
                     </div>
 
-                    <Link to="/cart" className="navbar-cart">
-                        <button className="cart-icon-btn">
-                            <i className="fa-solid fa-cart-shopping"></i>
-                            <p className="amount">{amount}</p>
-                        </button>
-                    </Link>
+
                 </div>
             </div>
             <ul className="navbar-links">
@@ -190,40 +125,9 @@ export const Navbar = () => {
                     className={`sidebar-container ${showSidebar && "show-sidebar-container"
                         }`}
                 >
-                    <div className="sidebar-search">
-                        <input
-                            type="text"
-                            className="search-input"
-                            placeholder="Search..."
-                            value={name}
-                            onChange={(e) => setName(e.target.value)}
-                        />
-                        <button className="search-icon-btn">
-                            <i className="fa-solid fa-magnifying-glass"></i>
-                        </button>
-                        {productsOption.length > 0 && (
-                            <div className="products-option">
-                                {productsOption.map((product) => {
-                                    return (
-                                        <Link
-                                            to={`/products/${product._id}`}
-                                            key={product._id}
-                                            className="link-name"
-                                            onClick={() => {
-                                                setName("")
-                                                setShowSidebar(false)
-                                            }}
-                                        >
-                                            <img src={product.images[0]} alt='img' className='image' />
-                                            <span className="name">
-                                                {product.name}
-                                            </span>
-                                        </Link>
-                                    );
-                                })}
-                            </div>
-                        )}
-                    </div>
+
+
+
                     <ul className="sidebar-links">
                         <li>
                             <Link to="/" className="link">

@@ -15,6 +15,7 @@ import { CheckOutPage } from "./pages/CheckOutPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import { OrderDetailPage } from "./pages/OrderDetailPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
+import { SellShoesPage } from "./pages/SellshoesPage";
 
 function App() {
     const dispatch = useDispatch()
@@ -39,6 +40,7 @@ function App() {
             <Route path="/about-us" element={<AboutPage />} />
             <Route path="/products" element={<ProductsPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/sellshoes" element={<SellShoesPage />} />
             <Route path="/products/:id" element={<SingleProductPage />} />
             <Route path="/cart" element={<CartPage />} />
             <Route path="/login" element={<LoginPage />} />
