@@ -24,6 +24,8 @@ export const AllUsers = () => {
                         <div>
                             <p className="name">Name: {user.username}</p>
                             <p className="price">Email: {user.email}</p>
+                            <p className="price">Phone number: {user.phone}</p>
+                            <p className="price">Address: {user.address} {user.ward} {user.district} {user.city}</p>
                             {/* <div>
                                 <button className="edit-btn">Edit</button>
                                 <button className="delete-btn">Delete</button>

@@ -9,6 +9,9 @@ const {
     sendEmail,
     forgotPassword,
     resetPassword,
+    updateUser,
+    changePassword,
+    confirmOrder,
 } = require("../controllers/User");
 const authenticateUser = require("../middlewares/auth");
 
@@ -18,6 +21,9 @@ router.route("/allusers").get(getUsers);
 router.route("/dashboard").get(authenticateUser, dashboard);
 router.route("/check-user").post(forgotPassword);
 router.route("/reset-password").put(authenticateUser, resetPassword);
+router.route("/update-user").post(authenticateUser, updateUser);
+router.route("/change-password").put(authenticateUser, changePassword);
 router.route("/send-email").post(sendEmail);
+router.route("/confirm-order").post(confirmOrder);
 
 module.exports = router;

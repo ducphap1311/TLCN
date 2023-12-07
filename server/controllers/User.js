@@ -24,6 +24,7 @@ const register = async (req, res) => {
         ward: user.ward,
         address: user.address,
         phone: user.phone,
+        email: user.email,
     });
 };
 
@@ -50,7 +51,8 @@ const login = async (req, res) => {
         district: user.district,
         ward: user.ward,
         phone: user.phone,
-        address: user.address
+        address: user.address,
+        email: user.email,
     });
 };
 
@@ -107,6 +109,89 @@ const sendEmail = async (req, res) => {
     const info = await sgMail.send(msg);
     res.status(200).json({ info });
 };
+
+const confirmOrder = async (req, res) => {
+    sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+    const msg = {
+        to: req.body.email, // Change to your recipient
+        from: { name: "DH Sneaker", email: "hophap1311@gmail.com" }, // Change to your verified sender
+        subject: "Reset password",
+        text: `See your order here http://localhost:3008/orders/${req.body.id}`,
+    };
+    const info = await sgMail.send(msg);
+    res.status(200).json({ info });
+};
+
+const updateUser = async (req, res) => {
+    const { email } = req.user;
+    if(email === req.body.email){
+        const user = await User.findOneAndUpdate({ email }, req.body, {
+            new: true,
+            runValidators: true,
+        });
+        
+        // user.resetPasswordToken = undefined;
+        // await user.save();
+        const token = user.createJWT();
+        return res.status(200).json({
+            token,
+            username: user.username,
+            city: user.city,
+            district: user.district,
+            ward: user.ward,
+            phone: user.phone,
+            address: user.address,
+            email: user.email,
+        });
+    }
+    const checkUser = await User.findOne({email: req.body.email})
+    if(!checkUser){
+        const user = await User.findOneAndUpdate({ email }, req.body, {
+            new: true,
+            runValidators: true,
+        });
+        
+        // user.resetPasswordToken = undefined;
+        // await user.save();
+        const token = user.createJWT();
+        return res.status(200).json({
+            token,
+            username: user.username,
+            city: user.city,
+            district: user.district,
+            ward: user.ward,
+            phone: user.phone,
+            address: user.address,
+            email: user.email,
+        });
+    }
+    throw new BadRequestError('Invalid email or email user')
+};
+
+const changePassword = async (req, res) => {
+    const { email, token } = req.user;
+    const {oldPassword} = req.body
+    const user = await User.findOne(
+        { email },
+    );
+    if (!user) {
+        throw new UnauthenticatedError("Invalid email");
+    }
+    const isPasswordMatch = await user.comparePassword(oldPassword);
+    if (!isPasswordMatch) {
+        throw new UnauthenticatedError("Invalid password");
+    }
+    const user1 = await User.findOneAndUpdate(
+        { email },
+        req.body,
+        {
+            new: true,
+            runValidators: true,
+        }
+    );
+    res.status(200).json(user1);
+}
+
 module.exports = {
     register,
     login,
@@ -116,4 +201,7 @@ module.exports = {
     sendEmail,
     forgotPassword,
     resetPassword,
+    updateUser,
+    changePassword,
+    confirmOrder
 };

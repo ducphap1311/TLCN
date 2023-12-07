@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import {toast, ToastContainer} from 'react-toastify'
+import { toast, ToastContainer } from "react-toastify";
 
 export const AddProduct = () => {
     // const [images, setImages] = useState([]);
@@ -14,7 +14,6 @@ export const AddProduct = () => {
     // const [description, setDescription] = useState("");
     const navigate = useNavigate();
 
-    
     const formik = useFormik({
         initialValues: {
             images: "",
@@ -61,15 +60,18 @@ export const AddProduct = () => {
                 console.log(response);
                 if (response.status === 201) {
                     // getProducts()
+                    toast("Add product successfully!", {
+                        type: "success",
+                        draggable: false,
+                    });
                     navigate("/allproducts");
                 } else {
                     toast("Invalid informations, try again", {
                         type: "error",
-                        draggable: false
-                    })
+                        draggable: false,
+                    });
                     return;
                 }
-                
             } catch (error) {
                 console.log(error);
             }
@@ -155,7 +157,7 @@ export const AddProduct = () => {
                         <option value=""></option>
                         <option value="men">Men</option>
                         <option value="women">Women</option>
-                        <option value="kids">Kids</option>
+                        {/* <option value="kids">Kids</option> */}
                     </select>
                     {/* {formik.errors.category ? <p>{formik.errors.category}</p> : null} */}
                     {/* <input
@@ -184,6 +186,21 @@ export const AddProduct = () => {
                 <button className="add-btn" type="submit">
                     Add
                 </button>
+                {/* <button
+                    className="clear-btn"
+                    type="button"
+                    onClick={() => {
+                        setImages("");
+                        setName("");
+                        setPrice("");
+                        setTotalAmount("");
+                        setDescription("");
+                        setCategory("");
+                        setQuality("");
+                    }}
+                >
+                    Clear
+                </button> */}
             </form>
         </div>
     );

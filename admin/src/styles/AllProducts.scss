@@ -49,6 +49,21 @@ form {
             background-color: $hover-color;
         }
     }
+    .clear-btn{
+        background-color: $primary-color;
+        padding: 10px 100px;
+        width: 300px;
+        font-size: 16px;
+        height: fit-content;
+        border: none;
+        color: white;
+        margin-top: 33px;
+        margin-left: 10px;
+        cursor: pointer;
+        &:hover{
+            background-color: $hover-color;
+        }
+    }
 }
 
 .product{

@@ -184,13 +184,27 @@ export const CheckOut = () => {
                 if (!response) {
                     throw new Error("something wrong here!");
                 }
+                const responseData = await response.json();
+                const data = responseData.order
+                const request = {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({
+                        email: localStorage.getItem("email"),
+                        id: data._id
+                    })
+                }
+                await fetch("http://localhost:5000/api/v2/confirm-order", request)
+
                 localStorage.removeItem("cartItems");
-                localStorage.setItem("city", values.city)
-                localStorage.setItem("ward", values.ward)
-                localStorage.setItem("district", values.district)
-                localStorage.setItem("phone", values.phone)
-                localStorage.setItem("username", values.name)
-                localStorage.setItem("address", values.address)
+                // localStorage.setItem("city", values.city)
+                // localStorage.setItem("ward", values.ward)
+                // localStorage.setItem("district", values.district)
+                // localStorage.setItem("phone", values.phone)
+                // localStorage.setItem("username", values.name)
+                // localStorage.setItem("address", values.address)
                 dispatch(clearCart());
                 updateProducts();
                 navigate("/orders");

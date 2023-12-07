@@ -1,0 +1,205 @@
+@import "variables";
+@import "mixin";
+
+.profile {
+    margin-top: 200px;
+    margin-bottom: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-family: $poppins-font;
+    h2 {
+        margin-bottom: 30px;
+    }
+    .username-container,
+    .email-container,
+    .city-container,
+    .district-container,
+    .ward-container,
+    .phone-container,
+    .address-container {
+        width: 600px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-bottom: 23px;
+        .title {
+            font-size: 17px;
+        }
+    }
+    .email-input,
+    .username-input,
+    .phone-input,
+    .city-input,
+    .district-input,
+    .ward-input,
+    .password-input,
+    .address-input {
+        outline: none;
+        border-radius: 2px;
+        border: 1px solid #c2c5e1;
+        background: #fff;
+        font-size: 17px;
+        &::placeholder {
+            font-size: 17px;
+            // color: #9096B2;
+        }
+        &:hover {
+            border-color: $primary-color;
+        }
+        &:focus {
+            border-color: $primary-color;
+        }
+    }
+
+    .city-input,
+    .district-input,
+    .ward-input,
+    .username-input,
+    .email-input,
+    .password-input,
+    .phone-input,
+    .address-input {
+        padding: 10px 13px;
+        width: 100%;
+        border-radius: 5px;
+    }
+    select {
+        font-size: $poppins-font;
+        font-size: 15px;
+        option {
+            font-size: $poppins-font;
+            font-size: 15px;
+        }
+    }
+    .btn-container {
+        display: flex;
+        justify-content: center;
+        button {
+            margin: 20px;
+            background-color: transparent;
+            padding: 5px 10px;
+            cursor: pointer;
+            border: 1px solid $primary-color;
+            background-color: $primary-color;
+            color: white;
+            font-weight: bold;
+            font-size: 17px;
+            transition: 0.3s ease;
+            &:hover {
+                background-color: white;
+                color: $primary-color;
+            }
+            &:active {
+                background-color: $primary-color;
+                color: white;
+            }
+        }
+    }
+    .username-error,
+    .email-error,
+    .password-error,
+    .city-error,
+    .district-error,
+    .ward-error,
+    .phone-error,
+    .address-error {
+        text-align: left;
+        color: red;
+        font-size: 13px;
+        margin-top: 5px;
+        margin-bottom: 0;
+    }
+    .modal{
+        display: none;
+    }
+    .modal-container{
+        padding: 20px;
+        border: 1px solid #9096B2;
+        border-radius: 5px;
+        background-color: white;
+        position: relative;
+        .modal-title{
+            margin-bottom: 10px;
+        }
+        .modal-subtitle{
+            color:#9096B2;
+            margin-bottom: 20px;
+        }
+        .modal-email-input{
+            padding: 10px;
+            font-size: 17px;
+            display: block;
+            width: 100%;
+            outline: none;
+            border: 1px solid #9096B2;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            &::placeholder{
+                color: #9096B2;
+            }
+            &:hover{
+                border-color: $primary-color;
+            }
+            &:focus{
+                border-color: $primary-color;
+            }
+        }
+        .email-rejected{
+            color: red;
+            margin-bottom: 20px;
+        }
+        .email-fulfilled{
+            color: rgb(200, 153, 121);
+            margin-bottom: 20px;
+        }
+        .email-pending{
+            color: #9096B2;
+            margin-bottom: 20px;
+        }
+        .search-btn{
+            background-color: $primary-color;
+            color: white;
+            padding: 5px 20px;
+            font-size: 17px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s ease;
+            &:hover{
+                background-color: $hover-color;
+            }
+            &:active{
+                background-color: $primary-color;
+            }
+        }
+        .close-modal-btn{
+            position: absolute;
+            right: 10px;
+            top: 10px;
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            .close-img{
+                width: 18px;
+                opacity: 0.6;
+                transition: 0.3s ease;
+                &:hover{
+                    opacity: 1;
+                }
+            }
+        }
+    }
+    .show-modal{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: fixed;
+        z-index: 100;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: rgb(114, 113, 113);
+    }
+}

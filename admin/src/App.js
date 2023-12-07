@@ -5,6 +5,7 @@ import { AllProductsPage } from './pages/AllProductsPage';
 import { AllOrdersPage } from './pages/AllOrdersPage';
 import { AllUsersPage } from './pages/AllUsersPage';
 import { AddProductPage } from './pages/AddProductPage';
+import { LoginPage } from './pages/LoginPage';
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
         <Route path='/allproducts' element={<AllProductsPage />} />
         <Route path='/allorders' element={<AllOrdersPage />} />
         <Route path='/allusers' element={<AllUsersPage />} />
+        <Route path='/login' element={<LoginPage />} />
       </Routes>
   );
 }

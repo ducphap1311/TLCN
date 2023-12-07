@@ -1,20 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import closeImg from "../assets/close.png";
-import "../styles/Login.scss";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import React, {useState, useRef, useEffect} from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import {useNavigate} from 'react-router-dom'
+import "../styles/Login.scss"
 
-const Login = () => {
+export const Login = () => {
     const navigate = useNavigate();
     const [showPassword, setShowPassword] = useState(false);
-    const [showModal, setShowModal] = useState(false);
     const passwordRef = useRef();
     const [loginStatus, setLoginStatus] = useState();
-    const [emailStatus, setEmailStatus] = useState();
-    const [email, setEmail] = useState("");
-
+    
     useEffect(() => {
         if (showPassword) {
             passwordRef.current.type = "text";
@@ -22,6 +17,7 @@ const Login = () => {
             passwordRef.current.type = "password";
         }
     }, [showPassword]);
+
     const formik = useFormik({
         initialValues: {
             email: "",
@@ -54,66 +50,18 @@ const Login = () => {
                     throw new Error("Invalid email or password");
                 }
                 const responseData = await response.json();
-                const { username, token, city, district, ward, phone, address, email } = responseData;
+                const {
+                    username,
+                    token,
+                } = responseData;
                 localStorage.setItem("username", username);
                 localStorage.setItem("token", token);
-                localStorage.setItem("city", city);
-                localStorage.setItem("district", district);
-                localStorage.setItem("ward", ward);
-                localStorage.setItem("phone", phone);
-                localStorage.setItem("address", address);
-                localStorage.setItem("email", email);
                 navigate("/");
             } catch (error) {
                 setLoginStatus("rejected");
             }
         },
     });
-
-    const checkEmailFunction = async () => {
-        setEmailStatus("pending");
-        try {
-            const requestOptions = {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ email }),
-            };
-            const response = await fetch(
-                "http://localhost:5000/api/v2/check-user",
-                requestOptions
-            );
-            console.log(response);
-            if (!response.ok) {
-                throw new Error("Invalid email");
-            }
-            const responseData = await response.json();
-            localStorage.setItem(
-                "resetPasswordToken",
-                responseData.resetPasswordToken
-            );
-            await sendEmail();
-            setEmailStatus("fulfilled");
-        } catch (error) {
-            setEmailStatus("rejected");
-        }
-    };
-
-    const sendEmail = async () => {
-        const requestOptions = {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                email,
-                token: localStorage.getItem("resetPasswordToken"),
-            }),
-        };
-        await fetch("http://localhost:5000/api/v2/send-email", requestOptions);
-        localStorage.removeItem('resetPasswordToken')
-    };
 
     return (
         <div className="login">
@@ -164,15 +112,17 @@ const Login = () => {
                             onChange={(e) => setShowPassword(!showPassword)}
                             className="checkbox-input"
                         />
-                        <label htmlFor="checkbox" className="checkbox-label">Show password</label>
+                        <label htmlFor="checkbox" className="checkbox-label">
+                            Show password
+                        </label>
                     </div>
-                    <button
+                    {/* <button
                         type="button"
                         className="forgot-password-btn"
                         onClick={() => setShowModal(true)}
                     >
                         Forgot password?
-                    </button>
+                    </button> */}
                 </div>
                 {loginStatus === "rejected" ? (
                     <p className="login-rejected">
@@ -184,57 +134,7 @@ const Login = () => {
                 <button type="submit" className="sign-in-btn">
                     Sign in
                 </button>
-                <p>
-                    Don't have an Account?
-                    <Link to="/register" className="link-to-register">
-                        Create account
-                    </Link>
-                </p>
             </form>
-            <div
-                className={`modal ${
-                    showModal && "show-modal"
-                }`}
-            >
-                <div className="modal-container">
-                    <button
-                        className="close-modal-btn"
-                        onClick={() => setShowModal(false)}
-                    >
-                        <img
-                            src={closeImg}
-                            alt="close modal"
-                            className="close-img"
-                        />
-                    </button>
-                    <h2 className="modal-title">Find your Account</h2>
-                    <p className="modal-subtitle">
-                        Please enter your email address to search for your
-                        account.
-                    </p>
-                    <input
-                        type="text"
-                        placeholder="Email address"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="modal-email-input"
-                    />
-                    {emailStatus === "rejected" ? (
-                        <p className="email-rejected">User does not exist</p>
-                    ) : emailStatus === "fulfilled" ? (
-                        <p className="email-fulfilled">
-                            Please check your email and reset your password
-                        </p>
-                    ) : emailStatus === "pending" ? (
-                        <p className="email-pending">Loading...</p>
-                    ) : null}
-                    <button onClick={checkEmailFunction} className="search-btn">
-                        Search
-                    </button>
-                </div>
-            </div>
         </div>
     );
 };
-
-export default Login;

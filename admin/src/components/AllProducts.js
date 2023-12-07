@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "../styles/AllProducts.scss";
+import {useNavigate} from 'react-router-dom'
 
 export const AllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -10,8 +11,10 @@ export const AllProducts = () => {
     const [category, setCategory] = useState("");
     const [quality, setQuality] = useState("");
     const [description, setDescription] = useState("");
-    const [id, setId] = useState('')
-    const [errorInput, setErrorInput] = useState(false)
+    const [id, setId] = useState("");
+    const [errorInput, setErrorInput] = useState(false);
+    const navigate = useNavigate()
+
     useEffect(() => {
         getProducts();
     }, []);
@@ -31,47 +34,54 @@ export const AllProducts = () => {
                 "Content-Type": "application/json",
             },
             body: JSON.stringify({
-                images: images.split(','),
+                images: images.split(","),
                 name,
                 price: Number(price),
                 totalAmount: Number(price),
                 category,
                 quality,
-                description
-            }
-            ),
+                description,
+            }),
         };
-        const response = await fetch(`http://localhost:5000/api/v1/products/${id}`, requestOptions)
-        if(response.status === 201){
-            getProducts()
+        const response = await fetch(
+            `http://localhost:5000/api/v1/products/${id}`,
+            requestOptions
+        );
+        if (response.status === 201) {
+            getProducts();
         } else {
-            setErrorInput(true)
+            setErrorInput(true);
         }
     };
 
     const deleteProduct = async (id) => {
         // console.log(id);
         const requestOptions = {
-            method: "DELETE"
+            method: "DELETE",
         };
-        const response = await fetch(`http://localhost:5000/api/v1/products/${id}`, requestOptions)
-        if(response.status === 201){
-            getProducts()
+        const response = await fetch(
+            `http://localhost:5000/api/v1/products/${id}`,
+            requestOptions
+        );
+        if (response.status === 201) {
+            getProducts();
         }
     };
 
     const editProduct = async (id) => {
-        const response = await fetch(`http://localhost:5000/api/v1/products/${id}`)
-        const responseData = await response.json()
-        const data = responseData.product
-        setImages(data.images.join(','))
-        setName(data.name)
-        setPrice(data.price)
-        setTotalAmount(data.totalAmount)
-        setCategory(data.category)
-        setQuality(data.quality)
-        setDescription(data.description)
-        setId(id)
+        const response = await fetch(
+            `http://localhost:5000/api/v1/products/${id}`
+        );
+        const responseData = await response.json();
+        const data = responseData.product;
+        setImages(data.images.join(","));
+        setName(data.name);
+        setPrice(data.price);
+        setTotalAmount(data.totalAmount);
+        setCategory(data.category);
+        setQuality(data.quality);
+        setDescription(data.description);
+        setId(id);
     };
     return (
         <div className="allproducts">
@@ -156,6 +166,21 @@ export const AllProducts = () => {
                 <button className="add-btn" type="submit">
                     Edit
                 </button>
+                <button
+                    className="clear-btn"
+                    type="button"
+                    onClick={() => {
+                        setImages("");
+                        setName("");
+                        setPrice("");
+                        setTotalAmount("");
+                        setDescription("");
+                        setCategory("");
+                        setQuality("");
+                    }}
+                >
+                    Clear
+                </button>
             </form>
             <div className="allproducts-container">
                 {products.map((product) => {
@@ -171,9 +196,27 @@ export const AllProducts = () => {
                                 <p className="name">{product.name}</p>
                                 <p className="price">${product.price}</p>
                                 <div>
-                                    <button className="edit-btn" onClick={() => editProduct(product._id)}>Edit</button>
-                                    <button className="delete-btn" onClick={() => deleteProduct(product._id)}>
+                                    <button
+                                        className="edit-btn"
+                                        onClick={() => editProduct(product._id)}
+                                    >
+                                        Edit
+                                    </button>
+                                    <button
+                                        className="delete-btn"
+                                        onClick={() =>
+                                            deleteProduct(product._id)
+                                        }
+                                    >
                                         Delete
+                                    </button>
+                                    <button
+                                        className="view-btn"
+                                        onClick={() =>
+                                            navigate(`/products/${product._id}`)
+                                        }
+                                    >
+                                        View
                                     </button>
                                 </div>
                             </div>

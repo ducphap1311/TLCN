@@ -67,7 +67,7 @@ userSchema.pre("findOneAndUpdate", async function (next) {
     }
 });
 userSchema.methods.createJWT = function(){
-    const token = jwt.sign({ id: this._id, username: this.username }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: this._id, username: this.username, email: this.email }, process.env.JWT_SECRET, {
         expiresIn: process.env.JWT_LIFETIME
     });
     return token

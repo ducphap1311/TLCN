@@ -15,6 +15,7 @@ import { CheckOutPage } from "./pages/CheckOutPage";
 import { OrdersPage } from "./pages/OrdersPage";
 import { OrderDetailPage } from "./pages/OrderDetailPage";
 import { ResetPasswordPage } from "./pages/ResetPasswordPage";
+import { ProfilePage } from "./pages/ProfilePage";
 
 function App() {
     const dispatch = useDispatch()
@@ -47,6 +48,7 @@ function App() {
             <Route path="/orders" element={<OrdersPage />} />
             <Route path="/orders/:id" element={<OrderDetailPage />} />
             <Route path="/reset-password/:id" element={<ResetPasswordPage />} />
+            <Route path="/profile" element={<ProfilePage />} />
         </Routes>
     );
 }
