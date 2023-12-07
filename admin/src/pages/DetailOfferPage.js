@@ -1,12 +1,12 @@
 import React from 'react'
 import { Navbar } from '../components/Navbar'
-import { Header } from '../components/Header'
+import { DetailOffer } from '../components/DetailOffer'
 
-export const HomePage = () => {
+export const DetailOfferPage = () => {
     return (
         <div>
-            <Header />
             <Navbar />
+            <DetailOffer />
         </div>
     )
 }

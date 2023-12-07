@@ -44,7 +44,7 @@ export const Contact = () => {
                         draggable: false,
                     });
                 })
-                .catch((error) => {});
+                .catch((error) => { });
         },
     });
 
@@ -70,7 +70,7 @@ export const Contact = () => {
                         <i className="fa-solid fa-envelope-open-text"></i>
                         <div className="email-info">
                             <h3>Email</h3>
-                            <p>hophap1311@gmail.com</p>
+                            <p>dhsneakerHCM@gmail.com</p>
                         </div>
                     </div>
                 </div>
@@ -116,7 +116,7 @@ export const Contact = () => {
                                 placeholder="Phone number"
                             />
                             {formik.touched.phoneNumber &&
-                            formik.errors.phoneNumber ? (
+                                formik.errors.phoneNumber ? (
                                 <p className="phone-error">{formik.errors.phoneNumber}</p>
                             ) : null}
 

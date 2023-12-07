@@ -17,10 +17,12 @@ export const Navbar = () => {
                 </div>
             </div>
             <ul className="sidebar">
-                <NavLink to="/">Add Product</NavLink>
-                <NavLink to="/allproducts">Products</NavLink>
-                <NavLink to="/allorders">Orders</NavLink>
-                <NavLink to="/allusers">Users</NavLink>
+                <NavLink to='/'>Add Product</NavLink>
+                <NavLink to='/allproducts'>All Products</NavLink>
+                <NavLink to='/allorders'>All Orders</NavLink>
+                <NavLink to='/allusers'>All Users</NavLink>
+                <NavLink to='/alloffer'>All Offer</NavLink>
+                <NavLink to='/allcontact'>Contact</NavLink>
             </ul>
         </div>
     );
