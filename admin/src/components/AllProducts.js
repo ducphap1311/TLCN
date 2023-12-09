@@ -210,14 +210,14 @@ export const AllProducts = () => {
                                     >
                                         Delete
                                     </button>
-                                    <button
-                                        className="view-btn"
-                                        onClick={() =>
-                                            navigate(`/products/${product._id}`)
-                                        }
-                                    >
-                                        View
-                                    </button>
+                                    <a href={`http://localhost:3008/products/${product._id}`} target="_blank">
+                                        <button
+                                            className="view-btn"
+                                            
+                                        >
+                                            View
+                                        </button>
+                                    </a>
                                 </div>
                             </div>
                         </div>

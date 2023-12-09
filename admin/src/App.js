@@ -8,6 +8,7 @@ import { AllContactPage } from './pages/AllContactPage';
 import { AllUsersPage } from './pages/AllUsersPage';
 import { AddProductPage } from './pages/AddProductPage';
 import { LoginPage } from './pages/LoginPage';
+import { DetailOfferPage } from './pages/DetailOfferPage';
 function App() {
   return (
       <Routes>

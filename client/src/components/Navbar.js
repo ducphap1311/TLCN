@@ -119,7 +119,7 @@ export const Navbar = () => {
                                     {userName}
                                 </p>
                                 <div
-                                    className={`login-register-container ${showDropDown && "show-dropdown"
+                                    className={`login-register-container ${showDropDown && "show-dropdown2"
                                         }`}
                                 >
                                     <Link to="/profile">My Profile</Link>
@@ -140,7 +140,7 @@ export const Navbar = () => {
                                     <i className="fa-solid fa-user"></i>
                                 </button>
                                 <div
-                                    className={`login-register-container ${showDropDown && "show-dropdown"
+                                    className={`login-register-container ${showDropDown && "show-dropdown1"
                                         }`}
                                 >
                                     <Link to="/login">Login</Link>

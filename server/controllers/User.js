@@ -115,7 +115,7 @@ const confirmOrder = async (req, res) => {
     const msg = {
         to: req.body.email, // Change to your recipient
         from: { name: "DH Sneaker", email: "hophap1311@gmail.com" }, // Change to your verified sender
-        subject: "Reset password",
+        subject: "Thank you for your order",
         text: `See your order here http://localhost:3008/orders/${req.body.id}`,
     };
     const info = await sgMail.send(msg);

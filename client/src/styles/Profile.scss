@@ -2,15 +2,18 @@
 @import "mixin";
 
 .profile {
-    margin-top: 200px;
+    margin-top: 180px;
     margin-bottom: 300px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     font-family: $poppins-font;
+    padding: 0 10px;
     h2 {
         margin-bottom: 30px;
+        font-size: 30px;
+        color:#3f414a;
     }
     .username-container,
     .email-container,
@@ -19,13 +22,17 @@
     .ward-container,
     .phone-container,
     .address-container {
-        width: 600px;
+        // width: 400px;
         display: grid;
         grid-template-columns: 1fr 1fr;
         margin-bottom: 23px;
         .title {
             font-size: 17px;
+            color:#676b7b;
         }
+    }
+    .address-container{
+        margin-bottom: 40px;
     }
     .email-input,
     .username-input,
@@ -40,6 +47,7 @@
         border: 1px solid #c2c5e1;
         background: #fff;
         font-size: 17px;
+        width: 400px;
         &::placeholder {
             font-size: 17px;
             // color: #9096B2;
@@ -60,35 +68,45 @@
     .password-input,
     .phone-input,
     .address-input {
-        padding: 10px 13px;
+        padding: 5px 13px;
         width: 100%;
         border-radius: 5px;
+        color:#3f414a;
+        letter-spacing: 0.7px;
     }
     select {
         font-size: $poppins-font;
         font-size: 15px;
+        padding: 5px 9px;
+        border: 1px solid #c2c5e1;
+        border-radius: 2px;
+        color:#3f414a;
         option {
             font-size: $poppins-font;
             font-size: 15px;
         }
     }
     .btn-container {
+        width: 100%;
+        margin: 0 auto;
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
+
         button {
-            margin: 20px;
+            // margin: 20px;
             background-color: transparent;
-            padding: 5px 10px;
+            padding: 7px 0;
+            font-size: 19px;
+            width: 45%;
+            border-radius: 2px;
             cursor: pointer;
             border: 1px solid $primary-color;
             background-color: $primary-color;
             color: white;
             font-weight: bold;
-            font-size: 17px;
             transition: 0.3s ease;
             &:hover {
-                background-color: white;
-                color: $primary-color;
+                background-color: $hover-color;
             }
             &:active {
                 background-color: $primary-color;
@@ -114,13 +132,16 @@
         display: none;
     }
     .modal-container{
-        padding: 20px;
+        width: 500px;
+        padding: 20px 40px;
         border: 1px solid #9096B2;
         border-radius: 5px;
         background-color: white;
         position: relative;
+        
         .modal-title{
-            margin-bottom: 10px;
+            margin-bottom: 20px;
+            font-size: 25px;
         }
         .modal-subtitle{
             color:#9096B2;
@@ -134,7 +155,7 @@
             outline: none;
             border: 1px solid #9096B2;
             border-radius: 5px;
-            margin-bottom: 30px;
+            margin-bottom: 20px;
             &::placeholder{
                 color: #9096B2;
             }
@@ -148,20 +169,24 @@
         .email-rejected{
             color: red;
             margin-bottom: 20px;
+            text-align: center;
         }
         .email-fulfilled{
             color: rgb(200, 153, 121);
             margin-bottom: 20px;
+            text-align: center;
         }
         .email-pending{
             color: #9096B2;
             margin-bottom: 20px;
+            text-align: center;
         }
         .search-btn{
+            width: 100%;
             background-color: $primary-color;
             color: white;
-            padding: 5px 20px;
-            font-size: 17px;
+            padding: 7px 20px;
+            font-size: 19px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -200,6 +225,6 @@
         bottom: 0;
         left: 0;
         right: 0;
-        background-color: rgb(114, 113, 113);
+        background-color: rgba(126, 126, 126, 1);
     }
 }

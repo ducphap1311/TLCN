@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import { Loading } from "./Loading";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { toast } from "react-toastify";
 
 export const CheckOut = () => {
     const { total, cartItems, amount } = useSelector((store) => store.cart);
@@ -197,7 +198,10 @@ export const CheckOut = () => {
                     })
                 }
                 await fetch("http://localhost:5000/api/v2/confirm-order", request)
-
+                toast("Order successfully", {
+                    type: "success",
+                    draggable: false
+                })
                 localStorage.removeItem("cartItems");
                 // localStorage.setItem("city", values.city)
                 // localStorage.setItem("ward", values.ward)

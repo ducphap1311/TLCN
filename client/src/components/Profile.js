@@ -183,13 +183,13 @@ export const Profile = () => {
 
     return (
         <div className="profile">
-            <h2>Your informations</h2>
+            <h2>My profile informations</h2>
             <form
                 className="profile-informations"
                 onSubmit={formik.handleSubmit}
             >
                 <div className="username-container">
-                    <p className="title">User Name: </p>
+                    <p className="title">User Name</p>
                     <input
                         type="text"
                         id="username"
@@ -206,7 +206,7 @@ export const Profile = () => {
                     ) : null}
                 </div>
                 <div className="email-container">
-                    <p className="title">Email: </p>
+                    <p className="title">Email</p>
                     <input
                         type="email"
                         id="email"
@@ -221,7 +221,7 @@ export const Profile = () => {
                     ) : null}
                 </div>
                 <div className="phone-container">
-                    <p className="title">Phone number: </p>
+                    <p className="title">Phone number</p>
                     <input
                         type="text"
                         id="phone"
@@ -236,7 +236,7 @@ export const Profile = () => {
                     ) : null}
                 </div>
                 <div className="city-container">
-                    <p className="title">City: </p>
+                    <p className="title">City</p>
                     <select
                         name="city"
                         value={formik.values.city}
@@ -259,7 +259,7 @@ export const Profile = () => {
                     ) : null}
                 </div>
                 <div className="district-container">
-                    <p className="title">District: </p>
+                    <p className="title">District</p>
                     <select
                         name="district"
                         value={formik.values.district}
@@ -284,7 +284,7 @@ export const Profile = () => {
                     ) : null}
                 </div>
                 <div className="ward-container">
-                    <p className="title">Ward: </p>
+                    <p className="title">Ward</p>
                     <select
                         value={formik.values.ward}
                         onChange={formik.handleChange}
@@ -307,7 +307,7 @@ export const Profile = () => {
                     ) : null}
                 </div>
                 <div className="address-container">
-                    <p className="title">Address: </p>
+                    <p className="title">Address</p>
                     <input
                         name="address"
                         value={formik.values.address}
@@ -353,20 +353,21 @@ export const Profile = () => {
                     />
                     <input
                         type="password"
-                        placeholder="Old password"
+                        placeholder="New password"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         className="modal-email-input"
                     />
                     {passwordStatus === "rejected" ? (
-                        <p className="email-rejected">Password is not suitable</p>
+                        <p className="email-rejected">Your password is incorrect</p>
                     ) : passwordStatus === "fulfilled" ? (
                         <p className="email-fulfilled">
                             Change password successfully
                         </p>
                     ) : passwordStatus === "pending" ? (
-                        <p className="email-pending">Loading...</p>
+                        <p className="email-pending">Loading</p>
                     ) : null}
+                    
                     <button onClick={checkPasswordFunction} className="search-btn">
                         Change
                     </button>
