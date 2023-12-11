@@ -10,4 +10,10 @@ const getMessages = async (req, res) => {
     res.status(200).json({ message });
 };
 
-module.exports = { createMessage, getMessages };
+const deleteMessage = async (req, res) => {
+    const {id} = req.params
+    const message = await Message.findOneAndDelete({_id: id})
+    res.status(200).json({message})
+
+}
+module.exports = { createMessage, getMessages, deleteMessage };

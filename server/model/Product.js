@@ -32,7 +32,11 @@ const productSchema = new mongoose.Schema({
     },
     size: {
         type: String,
-        default: '38'
+        default: '35'
+    }, 
+    sizes: {
+        type: Array,
+        required: [true, "Please provide sizes"]
     }
 
 },

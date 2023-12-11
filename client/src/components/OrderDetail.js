@@ -68,10 +68,10 @@ export const OrderDetail = () => {
                         <p>Address: {order.address}</p>
                         <p>Date: {formattedTime}</p>
                         <p>Order total: ${order.orderTotal}</p>
-                        <p>Status: Shipping</p>
+                        <p>Status: {order.status}</p>
                     </div>
                     <div className="overflow-x-auto">
-                        <table>
+                        <table className="orders-info">
                             <thead>
                                 <tr>
                                     <th>Products</th>

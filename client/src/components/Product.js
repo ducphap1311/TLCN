@@ -67,7 +67,7 @@ const Product = ({ product }) => {
             </p>
             <button
                 className="add-btn"
-                onClick={() => addToCart(product._id, 1, product.totalAmount, '38')}
+                onClick={() => addToCart(product._id, 1, product.totalAmount, '35')}
             >
                 Add To Cart
             </button>

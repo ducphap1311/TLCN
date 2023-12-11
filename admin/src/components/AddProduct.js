@@ -23,6 +23,7 @@ export const AddProduct = () => {
             description: "",
             category: "",
             quality: "",
+            sizes: ""
         },
         validationSchema: Yup.object({
             images: Yup.string().required("Please provide image link address"),
@@ -34,6 +35,7 @@ export const AddProduct = () => {
             ),
             category: Yup.string().required("Please provide category"),
             quality: Yup.string(),
+            sizes: Yup.string().required("Please provide sizes")
         }),
         onSubmit: async (values) => {
             console.log(values);
@@ -50,6 +52,7 @@ export const AddProduct = () => {
                     category: values.category,
                     quality: values.quality,
                     description: values.description,
+                    sizes: values.sizes.split(",")
                 }),
             };
             try {
@@ -134,14 +137,14 @@ export const AddProduct = () => {
                 </div>
                 <div className="form-child">
                     <label htmlFor="description">Description</label>
-                    <textarea
+                    <input
                         id="description"
                         name="description"
                         required
                         value={formik.values.description}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
-                    ></textarea>
+                    />
                     {/* {formik.errors.description ? <p>{formik.errors.description}</p> : null} */}
                 </div>
                 <div className="form-child">
@@ -177,6 +180,19 @@ export const AddProduct = () => {
                         name="quality"
                         // required
                         value={formik.values.quality}
+                        onChange={formik.handleChange}
+                        onBlur={formik.handleBlur}
+                    />
+                    {/* {formik.errors.quality ? <p>{formik.errors.quality}</p>: null} */}
+                </div>
+                <div className="form-child">
+                    <label htmlFor="sizes">Sizes</label>
+                    <input
+                        type="text"
+                        id="sizes"
+                        name="sizes"
+                        // required
+                        value={formik.values.sizes}
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                     />

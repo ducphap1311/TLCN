@@ -26,4 +26,12 @@ const getSingleOrder = async (req, res) => {
     res.status(200).json({order})
 }
 
-module.exports = { getOrders, getAllOrders, createOrder, getSingleOrder };
+const updateOrder = async (req, res) => {
+    const {id} = req.params
+    const order = await Order.findOneAndUpdate({_id: id}, req.body, {
+        new: true,
+        runValidators: true
+    })
+    res.status(200).json({order})
+}
+module.exports = { getOrders, getAllOrders, createOrder, getSingleOrder, updateOrder };

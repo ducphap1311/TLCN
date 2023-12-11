@@ -15,7 +15,7 @@ export const SingleProduct = () => {
     const { id } = useParams();
     const [singleProduct, setSingleProduct] = useState();
     const [amount, setAmount] = useState(1);
-    const [size, setSize] = useState('38');
+    const [size, setSize] = useState('35');
     const dispatch = useDispatch();
     const navigate = useNavigate()
     const {cartItems} = useSelector(store => store.cart)
@@ -181,7 +181,7 @@ export const SingleProduct = () => {
     if (!singleProduct) {
         return <Loading />;
     } else {
-        const { _id, images, name, price, description, totalAmount } = singleProduct;
+        const { _id, images, name, price, description, totalAmount, sizes } = singleProduct;
         return (
             <div className="single-product">
                 <div className="single-product-container">
@@ -229,10 +229,12 @@ export const SingleProduct = () => {
                             {price}
                         </p>
                         <div className="product-size">
-                            <p>Size: </p>
+                            {/* <p>Size: </p> */}
                             <ul className="size-container">
-                                <li className={`${size === '35' ? 'active-size': ''}`} onClick={() => setSize('35')}>35</li>
-                                <li className={`${size === '36' ? 'active-size': ''}`} onClick={() => setSize('36')}>36</li>
+                                {sizes.map(s => {
+                                    return <li className={`${size === s ? 'active-size': ''}`} onClick={() => setSize(s)}>{s}</li>
+                                })}
+                                {/* <li className={`${size === '36' ? 'active-size': ''}`} onClick={() => setSize('36')}>36</li>
                                 <li className={`${size === '37' ? 'active-size': ''}`} onClick={() => setSize('37')}>37</li>
                                 <li className={`${size === '38' ? 'active-size': ''}`} onClick={() => setSize('38')}>38</li>
                                 <li className={`${size === '39' ? 'active-size': ''}`} onClick={() => setSize('39')}>39</li>
@@ -240,7 +242,7 @@ export const SingleProduct = () => {
                                 <li className={`${size === '41' ? 'active-size': ''}`} onClick={() => setSize('41')}>41</li>
                                 <li className={`${size === '42' ? 'active-size': ''}`} onClick={() => setSize('42')}>42</li>
                                 <li className={`${size === '43' ? 'active-size': ''}`} onClick={() => setSize('43')}>43</li>
-                                <li className={`${size === '44' ? 'active-size': ''}`} onClick={() => setSize('44')}>44</li>
+                                <li className={`${size === '44' ? 'active-size': ''}`} onClick={() => setSize('44')}>44</li> */}
                             </ul>
                         </div>
                         <p className="product-description">{description}</p>

@@ -44,23 +44,34 @@
 table {
     font-family: arial, sans-serif;
     border-collapse: collapse;
-    width: 100%;
+}
+
+.orders-list{
+    width: 1160px;
 }
 
 th{
-    // border-bottom: 0.5px solid $primary-color;
     text-align: left;
-    padding: 10px 15px;
+    padding: 10px 0;
 }
 td {
     // border: 1px solid #dddddd;
     text-align: left;
-    padding: 15px;
+    padding: 15px 0;
     font-size: 14px;
 }
 
 tr{
     color: rgb(40, 40, 40);
+}
+
+// tr:nth-child(odd) {
+//     background-color: #f2f2f2;
+// }
+
+tr:nth-child(1){
+    background-color: transparent;
+    color: black;
 }
 
 // tr:nth-child(odd) {

@@ -9,6 +9,7 @@ import { AllUsersPage } from './pages/AllUsersPage';
 import { AddProductPage } from './pages/AddProductPage';
 import { LoginPage } from './pages/LoginPage';
 import { DetailOfferPage } from './pages/DetailOfferPage';
+import { OrderDetailPage } from './pages/OrderDetailPage';
 function App() {
   return (
       <Routes>
@@ -20,6 +21,7 @@ function App() {
         <Route path='/allcontact' element={<AllContactPage />} />
         <Route path='/detailoffer' element={<DetailOfferPage />} /> 
         <Route path='/login' element={<LoginPage />} />
+        <Route path='/orderdetail' element={<OrderDetailPage />} />
       </Routes>
   );
 }

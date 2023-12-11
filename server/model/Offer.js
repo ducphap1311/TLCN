@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const orderSchema = new mongoose.Schema(
+const offerSchema = new mongoose.Schema(
     {
         name: {
             type: String,
@@ -10,33 +10,33 @@ const orderSchema = new mongoose.Schema(
             type: String,
             required: [true, "Please provide phone number"]
         },
-        address: {
+        productName: {
             type: String,
-            required: [true, "please provide address"],
+            required: [true, "Please provide product name"]
         },
-        amount: {
+        sizes: {
+            type: Array,
+            required: [true, "Please provide sizes"]
+        },
+        totalAmount: {
             type: Number,
             required: [true, 'please provide amount products']
         },
-        orderTotal: {
+        price: {
             type: Number,
-            requried: [true, "please provide price"],
+            required: [true, "Please provide price"]
         },
-        cartItems: {
+        images: {
             type: Array,
-            required: [true, "please provide cart items"],
+            required: [true, "Please provide images"]
         },
-        createdBy: {
-            type: mongoose.Types.ObjectId,
-            ref: 'User',
-            required: [true, 'please provide user']
-        },
-        status: {
+        description: {
             type: String,
-            default: "Unpack"
+            required: [true, "Please provide description"]
         }
+
     },
     { timestamps: true }
 );
 
-module.exports = mongoose.model('Order',orderSchema)
+module.exports = mongoose.model('Offer', offerSchema)

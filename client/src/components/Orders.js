@@ -73,7 +73,7 @@ export const Orders = () => {
                         <span>{orders.length}</span>
                     </div>
                     <div className="overflow-x-auto">
-                        <table>
+                        <table className="orders-list">
                             <tbody>
                                 <tr>
                                     <th>Customer</th>

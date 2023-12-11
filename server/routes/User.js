@@ -12,6 +12,7 @@ const {
     updateUser,
     changePassword,
     confirmOrder,
+    deleteUser,
 } = require("../controllers/User");
 const authenticateUser = require("../middlewares/auth");
 
@@ -25,5 +26,6 @@ router.route("/update-user").post(authenticateUser, updateUser);
 router.route("/change-password").put(authenticateUser, changePassword);
 router.route("/send-email").post(sendEmail);
 router.route("/confirm-order").post(confirmOrder);
+router.route("/delete-user/:id").delete(deleteUser);
 
 module.exports = router;

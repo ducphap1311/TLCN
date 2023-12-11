@@ -5,6 +5,7 @@ const productRouter = require("./routes/Product");
 const userRouter = require("./routes/User");
 const orderRouter = require("./routes/Order");
 const messageRouter = require("./routes/Message");
+const offerRouter = require("./routes/Offer");
 const notFound = require("./middlewares/not-found");
 const errorHandlerFunction = require("./middlewares/error-handler");
 const connectDB = require("./db/connect");
@@ -30,6 +31,7 @@ app.use("/api/v1", productRouter);
 app.use("/api/v2", userRouter);
 app.use("/api/v3", orderRouter);
 app.use("/api/v4", messageRouter);
+app.use("/api/v5", offerRouter);
 app.use(notFound);
 app.use(errorHandlerFunction);
 

@@ -58,7 +58,7 @@ form {
         border: none;
         color: white;
         margin-top: 33px;
-        margin-left: 10px;
+        margin-left: 20px;
         cursor: pointer;
         &:hover{
             background-color: $hover-color;
@@ -74,6 +74,7 @@ form {
     img{
         width: 100px;
         margin-right: 10px;
+        border-radius: 50%;
     }
     .name{
         font-size: 14px;
@@ -91,10 +92,9 @@ form {
         cursor: pointer;
         background-color: $primary-color;
         color: white;
-        border-radius: 5px;
+        // border-radius: 5px;
         &:hover{
-            background-color: transparent;
-            color: $primary-color;
+            background-color: $hover-color;
         }
     }
 }

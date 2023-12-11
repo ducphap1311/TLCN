@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react";
 import "../styles/AllProducts.scss";
 import {useNavigate} from 'react-router-dom'
+import { toast } from "react-toastify";
 
 export const AllProducts = () => {
     const [products, setProducts] = useState([]);
     const [images, setImages] = useState([]);
+    const [sizes, setSizes] = useState([]);
     const [name, setName] = useState("");
     const [price, setPrice] = useState("");
     const [totalAmount, setTotalAmount] = useState("");
@@ -35,6 +37,7 @@ export const AllProducts = () => {
             },
             body: JSON.stringify({
                 images: images.split(","),
+                sizes: sizes.split(","),
                 name,
                 price: Number(price),
                 totalAmount: Number(price),
@@ -48,8 +51,16 @@ export const AllProducts = () => {
             requestOptions
         );
         if (response.status === 201) {
+            toast("Edit product successfully", {
+                type: "success",
+                draggable: false
+            })
             getProducts();
         } else {
+            toast("Invalid informations, try again", {
+                type: "error",
+                draggable: false
+            })
             setErrorInput(true);
         }
     };
@@ -75,6 +86,7 @@ export const AllProducts = () => {
         const responseData = await response.json();
         const data = responseData.product;
         setImages(data.images.join(","));
+        setSizes(data.sizes.join(","));
         setName(data.name);
         setPrice(data.price);
         setTotalAmount(data.totalAmount);
@@ -132,13 +144,13 @@ export const AllProducts = () => {
                 </div>
                 <div className="form-child">
                     <label htmlFor="description">Description</label>
-                    <textarea
+                    <input
                         id="description"
                         name="description"
                         required
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
-                    ></textarea>
+                    />
                 </div>
                 <div className="form-child">
                     <label htmlFor="category">Category</label>
@@ -162,11 +174,22 @@ export const AllProducts = () => {
                         onChange={(e) => setQuality(e.target.value)}
                     />
                 </div>
+                <div className="form-child">
+                    <label htmlFor="sizes">Sizes</label>
+                    <input
+                        type="text"
+                        id="sizes"
+                        name="sizes"
+                        required
+                        value={sizes}
+                        onChange={(e) => setSizes(e.target.value)}
+                    />
+                </div>
 
                 <button className="add-btn" type="submit">
                     Edit
                 </button>
-                <button
+                {/* <button
                     className="clear-btn"
                     type="button"
                     onClick={() => {
@@ -180,7 +203,7 @@ export const AllProducts = () => {
                     }}
                 >
                     Clear
-                </button>
+                </button> */}
             </form>
             <div className="allproducts-container">
                 {products.map((product) => {

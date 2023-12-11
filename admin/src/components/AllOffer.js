@@ -63,8 +63,9 @@ export const AllOffer = () => {
                     <TableRow>
                         <StyledTableCell align="right">User Name</StyledTableCell>
                         <StyledTableCell align="right">Product Name</StyledTableCell>
+                        <StyledTableCell align="right">Amount</StyledTableCell>
                         <StyledTableCell align="right">Size</StyledTableCell>
-                        <StyledTableCell align="right">Desired Price (VND)</StyledTableCell>
+                        <StyledTableCell align="right">Desired Price ($)</StyledTableCell>
                         <StyledTableCell align="center"></StyledTableCell>
                     </TableRow>
                 </TableHead>
@@ -75,8 +76,11 @@ export const AllOffer = () => {
                                 {order.name}
                             </StyledTableCell>
                             <StyledTableCell align="right">{order.nameproduct}</StyledTableCell>
+                            <StyledTableCell align="right">100</StyledTableCell>
                             <StyledTableCell align="right">{order.size}</StyledTableCell>
                             <StyledTableCell align="right">{order.price}</StyledTableCell>
+                            <StyledTableCell align="center">Accept</StyledTableCell>
+                            <StyledTableCell align="center">Decline</StyledTableCell>
                             <StyledTableCell align="center">
                                 <Link to="/detailoffer" style={{ textDecoration: 'none' }}>
                                     <p className="detail" style={{ color: "#00008b", hover: { textDecoration: 'underline' } }}>See Detail</p>
