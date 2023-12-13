@@ -1,10 +1,44 @@
 import React, { useState, useEffect } from "react";
 import "../styles/AllOrders.scss";
-import { Link } from "react-router-dom";
+import {useNavigate, Link} from 'react-router-dom'
+import { toast } from "react-toastify";
+import { Loading } from "./Loading";
 
 export const AllOrders = () => {
     const [orders, setOrders] = useState([]);
     const [selectedStatus, setSelectedStatus] = useState('');
+    const token = localStorage.getItem("token");
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorUser, setErrorUser] = useState(false);
+
+    useEffect(() => {
+        authenticateUser();
+    }, []);
+    const authenticateUser = async () => {
+        setIsLoading(true);
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        try {
+            const response = await fetch(
+                "http://localhost:5000/api/v2/dashboard",
+                requestOptions
+            );
+            const responseData = await response.json();
+            const success = responseData.msg;
+            if (success !== "success") {
+                throw new Error("Invalid user");
+            }
+            setErrorUser(false);
+            setIsLoading(false);
+        } catch (error) {
+            setErrorUser(true);
+            setIsLoading(false);
+        }
+    };
 
     useEffect(() => {
         getOrders();
@@ -30,6 +64,27 @@ export const AllOrders = () => {
         await fetch(`http://localhost:5000/api/v3/allorders/${id}`, requestOptions)
         getOrders()
     };
+    if (isLoading) {
+        return <Loading />;
+    } else if (!token || errorUser) {
+        return (
+            <div
+                className="login-to-continue"
+                style={{
+                    textAlign: "center",
+                    marginTop: "150px",
+                    fontSize: "25px",
+                    fontFamily: "sans-serif",
+                }}
+            >
+                <p>Please login to continue</p>
+                <Link to="/login" className="login-link" style={{color: "#56B280"}}>
+                    Login here
+                </Link>
+            </div>
+        );
+    }
+
     if (orders.length <= 0) {
         return;
     }

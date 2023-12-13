@@ -1,95 +1,169 @@
 import React, { useState, useEffect } from "react";
-import { styled } from '@mui/material/styles';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell, { tableCellClasses } from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { styled } from "@mui/material/styles";
+import Table from "@mui/material/Table";
+import TableBody from "@mui/material/TableBody";
+import TableCell, { tableCellClasses } from "@mui/material/TableCell";
+import TableContainer from "@mui/material/TableContainer";
+import TableHead from "@mui/material/TableHead";
+import TableRow from "@mui/material/TableRow";
+import Paper from "@mui/material/Paper";
 import "../styles/AllOrders.scss";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
+import "../styles/AllOffers.scss";
+import { useNavigate} from "react-router-dom";
+import { Loading } from "./Loading";
 
 export const AllOffer = () => {
-    // const [orders, setOrders] = useState([]);
+    const [offers, setOffers] = useState([]);
+    const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorUser, setErrorUser] = useState(false);
+    useEffect(() => {
+        authenticateUser();
+    }, []);
+    const authenticateUser = async () => {
+        setIsLoading(true);
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        try {
+            const response = await fetch(
+                "http://localhost:5000/api/v2/dashboard",
+                requestOptions
+            );
+            const responseData = await response.json();
+            const success = responseData.msg;
+            if (success !== "success") {
+                throw new Error("Invalid user");
+            }
+            setErrorUser(false);
+            setIsLoading(false);
+        } catch (error) {
+            setErrorUser(true);
+            setIsLoading(false);
+        }
+    };
+    useEffect(() => {
+        getOffers();
+    }, []);
 
-    // useEffect(() => {
-    //     getOrders();
-    // }, []);
+    const getOffers = async () => {
+        const response = await fetch("http://localhost:5000/api/v5/offers");
+        const responseData = await response.json();
+        setOffers(responseData.offers);
+    };
 
-    // const getOrders = async () => {
-    //     const response = await fetch("http://localhost:5000/api/v3/allorders");
-    //     const responseData = await response.json();
-    //     setOrders(responseData.orders);
-    // };
-
-    function createData(name, nameproduct, size, price) {
-        return { name, nameproduct, size, price };
+    const deleteOffer = async (id) => {
+        const req = {
+            method: "DELETE",
+        };
+        await fetch(`http://localhost:5000/api/v5/offers/${id}`, req);
+        getOffers();
+    };
+    if (isLoading) {
+        return <Loading />;
+    } else if (!token || errorUser) {
+        return (
+            <div
+                className="login-to-continue"
+                style={{
+                    textAlign: "center",
+                    marginTop: "150px",
+                    fontSize: "25px",
+                    fontFamily: "sans-serif",
+                }}
+            >
+                <p>Please login to continue</p>
+                <Link to="/login" className="login-link" style={{color: "#56B280"}}>
+                    Login here
+                </Link>
+            </div>
+        );
     }
-
-    const rows = [
-        createData('Ho Duc Phap', 'converse 70s', 41, 200000),
-        createData('Le Hoang Hai Dang', 'Mlb linner', 42, 500000),
-        createData('Nguyen Van A', 'samba classic', 41, 400000),
-        createData('Le Thi B', 'asic Mz', 41, 900000),
-
-    ];
-
-    const StyledTableCell = styled(TableCell)(({ theme }) => ({
-        [`&.${tableCellClasses.head}`]: {
-            backgroundColor: theme.palette.common.black,
-            color: theme.palette.common.white,
-        },
-        [`&.${tableCellClasses.body}`]: {
-            fontSize: 14,
-        },
-    }));
-
-    const StyledTableRow = styled(TableRow)(({ theme }) => ({
-        '&:nth-of-type(odd)': {
-            backgroundColor: theme.palette.action.hover,
-        },
-        // hide last border
-        '&:last-child td, &:last-child th': {
-            border: 0,
-        },
-    }));
-
+    
+    if (offers.length <= 0) {
+        return;
+    }
+    
     return (
-
-        <TableContainer component={Paper}>
-            <Table sx={{ minWidth: 700 }} aria-label="customized table">
-                <TableHead>
-                    <TableRow>
-                        <StyledTableCell align="right">User Name</StyledTableCell>
-                        <StyledTableCell align="right">Product Name</StyledTableCell>
-                        <StyledTableCell align="right">Amount</StyledTableCell>
-                        <StyledTableCell align="right">Size</StyledTableCell>
-                        <StyledTableCell align="right">Desired Price ($)</StyledTableCell>
-                        <StyledTableCell align="center"></StyledTableCell>
-                    </TableRow>
-                </TableHead>
-                <TableBody>
-                    {rows.map((order) => (
-                        <StyledTableRow >
-                            <StyledTableCell align="right">
-                                {order.name}
-                            </StyledTableCell>
-                            <StyledTableCell align="right">{order.nameproduct}</StyledTableCell>
-                            <StyledTableCell align="right">100</StyledTableCell>
-                            <StyledTableCell align="right">{order.size}</StyledTableCell>
-                            <StyledTableCell align="right">{order.price}</StyledTableCell>
-                            <StyledTableCell align="center">Accept</StyledTableCell>
-                            <StyledTableCell align="center">Decline</StyledTableCell>
-                            <StyledTableCell align="center">
-                                <Link to="/detailoffer" style={{ textDecoration: 'none' }}>
-                                    <p className="detail" style={{ color: "#00008b", hover: { textDecoration: 'underline' } }}>See Detail</p>
-                                </Link>
-                            </StyledTableCell>
-                        </StyledTableRow>
-                    ))}
-                </TableBody>
-            </Table>
-        </TableContainer>
+        <div
+            className="offers"
+            style={{ marginLeft: "300px", marginTop: "50px" }}
+        >
+            <table style={{ width: "100%" }}>
+                <tbody>
+                    <tr>
+                        <th>Name</th>
+                        <th>Product Name</th>
+                        <th>Sizes</th>
+                        <th>Amount</th>
+                        <th>Price</th>
+                    </tr>
+                    {offers.map((offer) => {
+                        return (
+                            <tr className="user" key={offer._id}>
+                                <td className="price">{offer.name}</td>
+                                <td
+                                    style={{
+                                        display: "flex",
+                                        alignItems: "center",
+                                    }}
+                                >
+                                    <Link
+                                        to={`/detailoffer/${offer._id}`}
+                                        style={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            textDecoration: "none",
+                                            color: "black",
+                                        }}
+                                    >
+                                        <img
+                                            src={offer.images[0]}
+                                            alt="user-img"
+                                            style={{ width: "100px" }}
+                                        />
+                                        <span className="name">
+                                            {offer.productName}
+                                        </span>
+                                    </Link>
+                                </td>
+                                <td className="price">
+                                    {offer.sizes.map((size) => {
+                                        return <span>{size}, </span>;
+                                    })}
+                                </td>
+                                <td className="price">{offer.totalAmount}</td>
+                                <td className="price">${offer.price}</td>
+                                <td
+                                    className="price"
+                                    style={{
+                                        color: "rgb(23, 176, 92)",
+                                        cursor: "pointer",
+                                    }}
+                                >
+                                    Accept
+                                </td>
+                                <td
+                                    className="price"
+                                    style={{ color: "red", cursor: "pointer" }}
+                                    onClick={() => deleteOffer(offer._id)}
+                                >
+                                    Decline
+                                </td>
+                                {/* <div>
+                                    <button className="edit-btn">Edit</button>
+                                    <button className="delete-btn">Delete</button>
+                                </div> */}
+                            </tr>
+                        );
+                    })}
+                </tbody>
+            </table>
+        </div>
     );
 };

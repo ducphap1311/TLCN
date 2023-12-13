@@ -1,124 +1,78 @@
 import React, { useState, useEffect } from "react";
-
+import "../styles/DetailOffer.scss";
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 
 export const DetailOffer = () => {
     const { id } = useParams();
-    const [order, setOrder] = useState();
+    const [offer, setOffer] = useState();
 
     useEffect(() => {
-        getSingleOrder();
+        getSingleOffer();
     }, []);
 
-    const getSingleOrder = async () => {
+    const getSingleOffer = async () => {
         try {
             const response = await fetch(
-                `http://localhost:5000/api/v3/orders/${id}`
+                `http://localhost:5000/api/v5/offers/${id}`
             );
             if (!response.ok) {
                 throw new Error("Invalid order id");
             }
             const responseData = await response.json();
-            const data = responseData.order;
-            setOrder(data);
+            const data = responseData.offer;
+            setOffer(data);
         } catch (error) {
             console.log(error);
         }
     };
-    if (!order) {
-
+    if (!offer) {
     } else {
-        const date = new Date(order.createdAt);
-        const hours = date.getHours();
-        const minutes = date.getMinutes();
-        const day = date.getDate();
-        const monthNames = [
-            "Jan",
-            "Feb",
-            "Mar",
-            "Apr",
-            "May",
-            "Jun",
-            "Jul",
-            "Aug",
-            "Sep",
-            "Oct",
-            "Nov",
-            "Dec",
-        ];
-        const month = monthNames[date.getMonth()];
-        const year = date.getFullYear();
-        const formattedTime = `${hours % 12}:${String(minutes).padStart(
-            2,
-            "0"
-        )} ${hours >= 12 ? "pm" : "am"} - ${month} ${day}th, ${year}`;
         return (
-            <div className="order-detail">
-                <h2>Your order information</h2>
-                <Link to="/orders" className="back-orders-link">
-                    Back to orders
+            <div
+                className="order-detail"
+                style={{
+                    display: "flex",
+                    justifyContent: "center",
+                    flexDirection: "column",
+                    alignItems: "center",
+                }}
+            >
+                <h2>Offer information</h2>
+                <Link to="/alloffer" className="back-orders-link">
+                    Back to offers
                 </Link>
-                <div className="detail-container">
-                    <div className="shipping-informations">
-                        <h3>Shipping Informations</h3>
-                        <p>Name: {order.name}</p>
-                        <p>Phone number: {order.phone}</p>
-                        <p>Address: {order.address}</p>
-                        <p>Date: {formattedTime}</p>
-                        <p>Order total: ${order.orderTotal}</p>
-                        <p>Status: Shipping</p>
-                    </div>
-                    <div className="overflow-x-auto">
-                        <table>
+                <div className="shipping-informations" style={{marginBottom: "30px"}}>
+                    <p style={{margin: "5px"}}>Name: {offer.name}</p>
+                    <p style={{margin: "5px"}}>Phone number: {offer.phone}</p>
+                    <p style={{margin: "5px"}}>Description: {offer.description}</p>
+                </div>
+                <div className="detail-container"  style={{width: "60%"}}>
+                    <div className="overflow-x-auto"  style={{width: "100%"}}>
+                        <table  style={{width: "100%"}}>
                             <thead>
                                 <tr>
                                     <th>Products</th>
                                     <th>Size</th>
-                                    <th>Category</th>
                                     <th>Amount</th>
                                     <th>Price</th>
-                                    <th>Total price</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                {order.cartItems.map((item) => {
-                                    const {
-                                        images,
-                                        name,
-                                        amount,
-                                        price,
-                                        size,
-                                        category,
-                                    } = item;
-                                    return (
-                                        <tr key={item._id}>
-                                            <td className="products-info">
-                                                <Link
-                                                    to={`/products/${item._id}`}
-                                                >
-                                                    <img
-                                                        src={images[0]}
-                                                        alt="product-img"
-                                                        className="product-img"
-                                                    />
-                                                </Link>
-                                                <Link to={`/products/${item._id}`} className="product-name">
-                                                    <p>
-                                                        {name}
-                                                    </p>
-                                                </Link>
-                                            </td>
-                                            <td>{size}</td>
-                                            <td>{category}</td>
-                                            <td>{amount}</td>
-                                            <td>${price}</td>
-                                            <td>
-                                                ${(price * amount).toFixed(2)}
-                                            </td>
-                                        </tr>
-                                    );
-                                })}
+                                <tr>
+                                    <td className="products-info" style={{display: "flex", alignItems: "center"}}>
+                                            <img
+                                                src={offer.images[0]}
+                                                alt="product-img"
+                                                className="product-img"
+                                                style={{width: "150px"}}
+                                            />
+                                            <p>{offer.productName}</p>
+                                    </td>
+                                    <td>{offer.sizes}</td>
+                                    <td>{offer.totalAmount}</td>
+                                    <td>${offer.price}</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>

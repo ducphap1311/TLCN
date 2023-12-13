@@ -19,7 +19,7 @@ function App() {
         <Route path='/allusers' element={<AllUsersPage />} />
         <Route path='/alloffer' element={<AllOfferPage />} />
         <Route path='/allcontact' element={<AllContactPage />} />
-        <Route path='/detailoffer' element={<DetailOfferPage />} /> 
+        <Route path='/detailoffer/:id' element={<DetailOfferPage />} /> 
         <Route path='/login' element={<LoginPage />} />
         <Route path='/orderdetail' element={<OrderDetailPage />} />
       </Routes>

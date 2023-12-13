@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { toast, ToastContainer } from "react-toastify";
+import { Loading } from "./Loading";
 
 export const AddProduct = () => {
     // const [images, setImages] = useState([]);
@@ -13,7 +14,38 @@ export const AddProduct = () => {
     // const [quality, setQuality] = useState("");
     // const [description, setDescription] = useState("");
     const navigate = useNavigate();
+    const token = localStorage.getItem("token");
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorUser, setErrorUser] = useState(false);
 
+    useEffect(() => {
+        authenticateUser();
+    }, []);
+    const authenticateUser = async () => {
+        setIsLoading(true);
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        try {
+            const response = await fetch(
+                "http://localhost:5000/api/v2/dashboard",
+                requestOptions
+            );
+            const responseData = await response.json();
+            const success = responseData.msg;
+            if (success !== "success") {
+                throw new Error("Invalid user");
+            }
+            setErrorUser(false);
+            setIsLoading(false);
+        } catch (error) {
+            setErrorUser(true);
+            setIsLoading(false);
+        }
+    };
     const formik = useFormik({
         initialValues: {
             images: "",
@@ -23,7 +55,7 @@ export const AddProduct = () => {
             description: "",
             category: "",
             quality: "",
-            sizes: ""
+            sizes: "",
         },
         validationSchema: Yup.object({
             images: Yup.string().required("Please provide image link address"),
@@ -35,7 +67,7 @@ export const AddProduct = () => {
             ),
             category: Yup.string().required("Please provide category"),
             quality: Yup.string(),
-            sizes: Yup.string().required("Please provide sizes")
+            sizes: Yup.string().required("Please provide sizes"),
         }),
         onSubmit: async (values) => {
             console.log(values);
@@ -52,7 +84,7 @@ export const AddProduct = () => {
                     category: values.category,
                     quality: values.quality,
                     description: values.description,
-                    sizes: values.sizes.split(",")
+                    sizes: values.sizes.split(","),
                 }),
             };
             try {
@@ -80,6 +112,26 @@ export const AddProduct = () => {
             }
         },
     });
+    if (isLoading) {
+        return <Loading />;
+    } else if (!token || errorUser) {
+        return (
+            <div
+                className="login-to-continue"
+                style={{
+                    textAlign: "center",
+                    marginTop: "150px",
+                    fontSize: "25px",
+                    fontFamily: "sans-serif",
+                }}
+            >
+                <p>Please login to continue</p>
+                <Link to="/login" className="login-link" style={{color: "#56B280"}}>
+                    Login here
+                </Link>
+            </div>
+        );
+    }
     return (
         <div className="addproduct">
             <form onSubmit={formik.handleSubmit}>

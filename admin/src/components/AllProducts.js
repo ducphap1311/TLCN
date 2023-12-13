@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import "../styles/AllProducts.scss";
-import {useNavigate} from 'react-router-dom'
+import {useNavigate, Link} from 'react-router-dom'
 import { toast } from "react-toastify";
+import { Loading } from "./Loading";
 
 export const AllProducts = () => {
     const [products, setProducts] = useState([]);
@@ -16,7 +17,38 @@ export const AllProducts = () => {
     const [id, setId] = useState("");
     const [errorInput, setErrorInput] = useState(false);
     const navigate = useNavigate()
+    const token = localStorage.getItem("token");
+    const [isLoading, setIsLoading] = useState(true);
+    const [errorUser, setErrorUser] = useState(false);
 
+    useEffect(() => {
+        authenticateUser();
+    }, []);
+    const authenticateUser = async () => {
+        setIsLoading(true);
+        const requestOptions = {
+            method: "GET",
+            headers: {
+                Authorization: `Bearer ${token}`,
+            },
+        };
+        try {
+            const response = await fetch(
+                "http://localhost:5000/api/v2/dashboard",
+                requestOptions
+            );
+            const responseData = await response.json();
+            const success = responseData.msg;
+            if (success !== "success") {
+                throw new Error("Invalid user");
+            }
+            setErrorUser(false);
+            setIsLoading(false);
+        } catch (error) {
+            setErrorUser(true);
+            setIsLoading(false);
+        }
+    };
     useEffect(() => {
         getProducts();
     }, []);
@@ -95,6 +127,26 @@ export const AllProducts = () => {
         setDescription(data.description);
         setId(id);
     };
+    if (isLoading) {
+        return <Loading />;
+    } else if (!token || errorUser) {
+        return (
+            <div
+                className="login-to-continue"
+                style={{
+                    textAlign: "center",
+                    marginTop: "150px",
+                    fontSize: "25px",
+                    fontFamily: "sans-serif",
+                }}
+            >
+                <p>Please login to continue</p>
+                <Link to="/login" className="login-link" style={{color: "#56B280"}}>
+                    Login here
+                </Link>
+            </div>
+        );
+    }
     return (
         <div className="allproducts">
             <form onSubmit={handleSubmit}>

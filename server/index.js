@@ -6,6 +6,7 @@ const userRouter = require("./routes/User");
 const orderRouter = require("./routes/Order");
 const messageRouter = require("./routes/Message");
 const offerRouter = require("./routes/Offer");
+const adminRouter = require("./routes/Admin");
 const notFound = require("./middlewares/not-found");
 const errorHandlerFunction = require("./middlewares/error-handler");
 const connectDB = require("./db/connect");
@@ -13,7 +14,7 @@ require("dotenv").config();
 const cors = require("cors");
 const helmet = require("helmet");
 const xss = require("xss-clean");
-const rateLimiter = require("express-rate-limit");
+const rateLimiter = require("express-rate-limit")
 
 app.set("trust proxy", 1);
 app.use(
@@ -32,6 +33,7 @@ app.use("/api/v2", userRouter);
 app.use("/api/v3", orderRouter);
 app.use("/api/v4", messageRouter);
 app.use("/api/v5", offerRouter);
+app.use("/api/v6", adminRouter);
 app.use(notFound);
 app.use(errorHandlerFunction);
 

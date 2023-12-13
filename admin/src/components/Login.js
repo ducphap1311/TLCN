@@ -29,7 +29,7 @@ export const Login = () => {
                 .email("Invalid email address"),
             password: Yup.string()
                 .required("Password required")
-                .min(8, "Password must be at least 8 characters"),
+                .min(1, "Password must be at least 8 characters"),
         }),
         onSubmit: async (values) => {
             setLoginStatus("pending");
@@ -43,7 +43,7 @@ export const Login = () => {
             };
             try {
                 const response = await fetch(
-                    "http://localhost:5000/api/v2/login",
+                    "http://localhost:5000/api/v6/login",
                     requestOptions
                 );
                 if (!response.ok) {
