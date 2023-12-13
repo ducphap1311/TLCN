@@ -33,6 +33,10 @@ const offerSchema = new mongoose.Schema(
         description: {
             type: String,
             required: [true, "Please provide description"]
+        },
+        status: {
+            type: String,
+            default: "Unactive"
         }
 
     },

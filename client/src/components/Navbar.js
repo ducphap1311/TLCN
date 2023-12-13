@@ -184,6 +184,11 @@ export const Navbar = () => {
                         Contact
                     </NavLink>
                 </li>
+                {/* <li>
+                    <NavLink to="/second-hand" className="link">
+                        Second Hand
+                    </NavLink>
+                </li> */}
             </ul>
             <div className={`sidebar ${showSidebar && "show-sidebar"}`}>
                 <div

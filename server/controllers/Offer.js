@@ -20,6 +20,14 @@ const createOffer = async (req, res) => {
     res.status(201).json({ offer });
 };
 
+const updateOffer =  async (req, res) => {
+    const {id} = req.params
+    const offer = await Offer.findOneAndUpdate({_id: id}, req.body, {
+        new: true,
+        runValidators: true
+    })
+    res.status(200).json({offer})
+}
 const deleteOffer = async (req, res) => {
     const { id: offerId } = req.params;
     const offer = await Offer.findOneAndDelete({ _id: offerId });
@@ -34,4 +42,5 @@ module.exports = {
     getOffers,
     createOffer,
     deleteOffer,
+    updateOffer
 };

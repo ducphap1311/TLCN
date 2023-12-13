@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import "../styles/AllOffers.scss";
 import { useNavigate} from "react-router-dom";
 import { Loading } from "./Loading";
+import { toast } from "react-toastify";
 
 export const AllOffer = () => {
     const [offers, setOffers] = useState([]);
@@ -56,6 +57,24 @@ export const AllOffer = () => {
         const responseData = await response.json();
         setOffers(responseData.offers);
     };
+
+    const updateOffer = async (id, st) => {
+        const req = {
+            method: "PUT",
+            headers: {
+                "Content-type": "application/json"
+            },
+            body: JSON.stringify({
+                status: st
+            })
+        }
+        await fetch(`http://localhost:5000/api/v5/offers/${id}`, req)
+        toast("Update successfully", {
+            type: "success",
+            draggable: false
+        })
+        getOffers()
+    }
 
     const deleteOffer = async (id) => {
         const req = {
@@ -102,6 +121,7 @@ export const AllOffer = () => {
                         <th>Sizes</th>
                         <th>Amount</th>
                         <th>Price</th>
+                        <th>Status</th>
                     </tr>
                     {offers.map((offer) => {
                         return (
@@ -139,21 +159,30 @@ export const AllOffer = () => {
                                 </td>
                                 <td className="price">{offer.totalAmount}</td>
                                 <td className="price">${offer.price}</td>
+                                <td className="price">{offer.status}</td>
                                 <td
                                     className="price"
                                     style={{
                                         color: "rgb(23, 176, 92)",
                                         cursor: "pointer",
                                     }}
+                                    onClick={() => updateOffer(offer._id, "Active")}
                                 >
                                     Accept
                                 </td>
                                 <td
                                     className="price"
                                     style={{ color: "red", cursor: "pointer" }}
-                                    onClick={() => deleteOffer(offer._id)}
+                                    onClick={() => updateOffer(offer._id, "Unactive")}
                                 >
                                     Decline
+                                </td>
+                                <td
+                                    className="price"
+                                    style={{ color: "red", cursor: "pointer" }}
+                                    onClick={() => deleteOffer(offer._id)}
+                                >
+                                    Delete
                                 </td>
                                 {/* <div>
                                     <button className="edit-btn">Edit</button>
