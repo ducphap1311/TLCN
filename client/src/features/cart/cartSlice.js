@@ -68,7 +68,7 @@ const cartSlice = createSlice({
         decreaseItem: (state, action) => {
             const newItems = state.cartItems
                 .map((item) => {
-                    if (item._id === action.payload) {
+                    if (item._id === action.payload._id && item.size === action.payload.size) {
                         return { ...item, amount: item.amount - 1 };
                     }
                     return item;
@@ -79,11 +79,11 @@ const cartSlice = createSlice({
         },
 
         increaseItem: (state, action) => {
-            // console.log(state.cartItems);
-            let product = state.data.filter(item => item._id === action.payload)
+            console.log(action.payload);
+            let product = state.data.filter(item => item._id === action.payload._id)
             product = JSON.parse(JSON.stringify(product));
             const newItems = state.cartItems.map((item) => {
-                if (item._id === action.payload && product[0].totalAmount > item.amount) {
+                if (item._id === action.payload._id && item.size === action.payload.size && product[0].totalAmount > item.amount) {
 
                     return { ...item, amount: item.amount + 1 };
                 }

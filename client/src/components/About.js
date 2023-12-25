@@ -16,7 +16,7 @@ export const About = () => {
                         />
                     </div>
                     <div className="about-text">
-                        <h2 className="title">About DP Sneaker</h2>
+                        <h2 className="title">About DH Sneaker</h2>
                         <p className="info">
                             "Along with the continuous development of world
                             fashion, many brands have launched genuine men's

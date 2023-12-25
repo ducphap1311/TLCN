@@ -92,8 +92,10 @@ export const CartItems = () => {
                                                         className="btn increase-btn"
                                                         onClick={() =>
                                                             dispatch(
-                                                                increaseItem(
-                                                                    _id
+                                                                increaseItem({
+                                                                    _id,
+                                                                    size
+                                                                }
                                                                 )
                                                             )
                                                         }
@@ -105,8 +107,10 @@ export const CartItems = () => {
                                                         className="btn decrease-btn"
                                                         onClick={() =>
                                                             dispatch(
-                                                                decreaseItem(
-                                                                    _id
+                                                                decreaseItem({
+                                                                    _id,
+                                                                    size
+                                                                }
                                                                 )
                                                             )
                                                         }
@@ -123,7 +127,7 @@ export const CartItems = () => {
                                             <button
                                                 className="btn increase-btn"
                                                 onClick={() =>
-                                                    dispatch(increaseItem(_id))
+                                                    dispatch(increaseItem({_id, size}))
                                                 }
                                             >
                                                 <i className="fas fa-plus"></i>
@@ -132,7 +136,7 @@ export const CartItems = () => {
                                             <button
                                                 className="btn decrease-btn"
                                                 onClick={() =>
-                                                    dispatch(decreaseItem(_id))
+                                                    dispatch(decreaseItem({_id, size}))
                                                 }
                                             >
                                                 <i className="fas fa-minus"></i>

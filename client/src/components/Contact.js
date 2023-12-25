@@ -33,7 +33,7 @@ export const Contact = () => {
                     email: values.email,
                     phonenumber: Number(values.phoneNumber),
                     location: values.location,
-                    message: values.message,
+                    message: values.message
                 }),
             };
 
