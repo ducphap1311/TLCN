@@ -70,7 +70,16 @@ export const Navbar = () => {
                 </div>
                 <div className="navbar-logo-container">
                     <Link to="/">
-                        <img src="https://scontent.fsgn14-1.fna.fbcdn.net/v/t1.15752-9/395632490_889921132656124_1884520880595606214_n.png?_nc_cat=108&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeFvT_8WneC0rUb2Q_hu7R6MPWT3hYqAE7c9ZPeFioATt6sfstfZW24W1HNDMiEfeWDzW9XAlZ3ibnj4AQbKZBFa&_nc_ohc=2epuke81svYAX80k4XA&_nc_ht=scontent.fsgn14-1.fna&oh=03_AdQXHMiyh0JFhXVbZEPjKdKw6JfcAxo3stctSAFXXmvShg&oe=657FE328" style={{ width: '130px', height: 'auto', objectFit: 'contain' }} alt="logo" className="logo-img" />
+                        <img
+                            src="https://scontent.fsgn4-1.fna.fbcdn.net/v/t1.15752-9/413191227_658687629538463_1485214829260394232_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeHKOwE6LdXdAGwhH3pu-RioqW4l6YXG0O-pbiXphcbQ74T3do4r7tnPw-FbcXUoB4cZRZJsnuODCI2TE44zP8jJ&_nc_ohc=dDpMZf5oN5oAX-oGMS0&_nc_ht=scontent.fsgn4-1.fna&oh=03_AdTZjVxTnRccIilHvtlVYXiVnIA4uK2vnvZ4YQmJnUx5SQ&oe=65BB2757"
+                            style={{
+                                width: "130px",
+                                height: "auto",
+                                objectFit: "contain",
+                            }}
+                            alt="logo"
+                            className="logo-img"
+                        />
                     </Link>
                 </div>
                 <div className="navbar-search-container">
@@ -95,7 +104,11 @@ export const Navbar = () => {
                                         className="link-name"
                                         onClick={() => setName("")}
                                     >
-                                        <img src={product.images[0]} alt='img' className='image' />
+                                        <img
+                                            src={product.images[0]}
+                                            alt="img"
+                                            className="image"
+                                        />
                                         <span className="name">
                                             {product.name}
                                         </span>
@@ -114,13 +127,14 @@ export const Navbar = () => {
                                     onClick={() =>
                                         setShowDropDown(!showDropDown)
                                     }
-                                    style={{ color: 'black' }}
+                                    style={{ color: "black" }}
                                 >
                                     {userName}
                                 </p>
                                 <div
-                                    className={`login-register-container ${showDropDown && "show-dropdown2"
-                                        }`}
+                                    className={`login-register-container ${
+                                        showDropDown && "show-dropdown2"
+                                    }`}
                                 >
                                     <Link to="/profile">My Profile</Link>
                                     <Link to="/orders">My Orders</Link>
@@ -140,8 +154,9 @@ export const Navbar = () => {
                                     <i className="fa-solid fa-user"></i>
                                 </button>
                                 <div
-                                    className={`login-register-container ${showDropDown && "show-dropdown1"
-                                        }`}
+                                    className={`login-register-container ${
+                                        showDropDown && "show-dropdown1"
+                                    }`}
                                 >
                                     <Link to="/login">Login</Link>
                                     <Link to="/register">Register</Link>
@@ -192,8 +207,9 @@ export const Navbar = () => {
             </ul>
             <div className={`sidebar ${showSidebar && "show-sidebar"}`}>
                 <div
-                    className={`sidebar-container ${showSidebar && "show-sidebar-container"
-                        }`}
+                    className={`sidebar-container ${
+                        showSidebar && "show-sidebar-container"
+                    }`}
                 >
                     <div className="sidebar-search">
                         <input
@@ -215,11 +231,15 @@ export const Navbar = () => {
                                             key={product._id}
                                             className="link-name"
                                             onClick={() => {
-                                                setName("")
-                                                setShowSidebar(false)
+                                                setName("");
+                                                setShowSidebar(false);
                                             }}
                                         >
-                                            <img src={product.images[0]} alt='img' className='image' />
+                                            <img
+                                                src={product.images[0]}
+                                                alt="img"
+                                                className="image"
+                                            />
                                             <span className="name">
                                                 {product.name}
                                             </span>

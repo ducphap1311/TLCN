@@ -31,7 +31,7 @@ export const HeroSlider = () => {
         <div className="hero-slider">
             <Slider {...settings}>
                 <div className="slider-child">
-                    <img src="https://files.oaiusercontent.com/file-YbPsk5DckorDhGN9K7ZCg2WC?se=2023-12-15T08%3A51%3A53Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Dd099687e-b2ad-42cb-bc60-1618808f9693.webp&sig=XrKSBZS6ivW1YMmsPJGTJFOpaauqbSc7/l/xK/cZpAg%3D" alt="slider 1" className="slider-img" />
+                    <img src="https://png.pngtree.com/thumb_back/fw800/background/20230611/pngtree-wall-with-shoes-on-it-image_2881393.jpg" alt="slider 1" className="slider-img" />
                     <div className="slider-text">
                         <h1 className="title">DH Sneaker</h1>
                         <p className="info">
@@ -46,7 +46,7 @@ export const HeroSlider = () => {
                     </div>
                 </div>
                 <div className="slider-child">
-                    <img src="https://files.oaiusercontent.com/file-jLZer68pVRVZpss17vsJMXQ3?se=2023-12-15T08%3A54%3A17Z&sp=r&sv=2021-08-06&sr=b&rscc=max-age%3D31536000%2C%20immutable&rscd=attachment%3B%20filename%3Df7763e8d-09cc-4f7a-b74d-09483d6366da.webp&sig=qMVerL3VH1GERbhuOwTrFq4UAmTxYjZHBA3GCo0Pk4U%3D" alt="slider 2" className="slider-img" />
+                    <img src="https://png.pngtree.com/thumb_back/fw800/background/20230612/pngtree-three-pairs-of-sneakers-sitting-near-a-window-image_2911664.jpg" alt="slider 2" className="slider-img" />
                     <div className="slider-text">
                         <p className="title">DH Sneaker</p>
                         <p className="info">

@@ -97,7 +97,7 @@ export const AllOrders = () => {
                         <div>
                             <a href={`http://localhost:3008/orders/${order._id}`} target="_blank">
                                 <img
-                                    src="https://scontent.fsgn5-3.fna.fbcdn.net/v/t1.15752-9/386886401_2527330324095850_1357483950580613260_n.png?_nc_cat=104&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeFET8ovjTP9-uXrz-49yE_mSppicgWX0OZKmmJyBZfQ5p_bs3x5JUdbtf4NYHCp_ioF3LPNTlywduiU8f4GNz4r&_nc_ohc=zK_vlzGTRacAX9FYwkS&_nc_ht=scontent.fsgn5-3.fna&oh=03_AdTWOnwj7zczCkDjBHtLCHWetLUZMacUTSxvFQotHSF4Tg&oe=6581811C"
+                                    src="https://cdn-icons-png.flaticon.com/512/3496/3496155.png"
                                     alt="product-img"
                                 />
 

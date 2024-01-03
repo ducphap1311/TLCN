@@ -111,7 +111,7 @@ export const AllUsers = () => {
                                 }}
                             >
                                 <img
-                                    src="https://scontent.fsgn5-5.fna.fbcdn.net/v/t1.15752-9/370330930_631659042463641_7073685554668277350_n.png?_nc_cat=100&ccb=1-7&_nc_sid=8cd0a2&_nc_eui2=AeGOBC_0yQH-3XJhtQ8OgpezmDtNZlItblmYO01mUi1uWWaVojusrZEbhUFaD_RghtG94xZiTmvbe7RLM5MWMuDx&_nc_ohc=reaAw3-dX9gAX9rW2IO&_nc_ht=scontent.fsgn5-5.fna&oh=03_AdQw6Bgenh37YQIn0NcRGPXK9MBTiKAUAzHT_1D-bEu-rg&oe=65811D0C"
+                                    src="https://cdn-icons-png.flaticon.com/512/666/666201.png"
                                     alt="user-img"
                                 />
                                 <span className="name">{user.username}</span>
